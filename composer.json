@@ -1,0 +1,58 @@
+{
+    "name": "spatie/laravel-email-campaigns-ses-feedback",
+    "description": "Process feedback for email campaigns sent using Amazon SES",
+    "keywords": [
+        "spatie",
+        "laravel-email-campaigns-ses-feedback"
+    ],
+    "homepage": "https://github.com/spatie/laravel-email-campaigns-ses-feedback",
+    "authors": [
+        {
+            "name": "Freek Van der Herten",
+            "email": "freek@spatie.be",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "aws/aws-php-sns-message-validator": "^1.5",
+        "illuminate/http": "^6.4",
+        "orchestra/testbench": "^4.3",
+        "spatie/laravel-email-campaigns": "dev-master",
+        "spatie/laravel-webhook-client": "^2.2",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.3",
+        "phpunit/phpunit": "^8.2",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Spatie\\SesFeedback\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spatie\\SesFeedback\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Spatie\\SesFeedback\\SesFeedbackServiceProvider"
+            ],
+            "aliases": {
+                "Skeleton": "Spatie\\SesFeedback\\SesFeedbackFacade"
+            }
+        }
+    }
+}
