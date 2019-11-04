@@ -38,7 +38,7 @@ Route::mailgunFeedback('ses-feedback');
 ### Simple Email Service
 1. Create a configuration set in your AWS SES console if you haven't already
 2. Add a SNS destination in the Event Destinations
-    2.1 Make sure to check the types of notifications you want to receive
+    - Make sure to check the types of notifications you want to receive
 3. Create a new topic for this destination
 
 ### Simple Notification Service
