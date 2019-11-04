@@ -19,10 +19,14 @@ class SesSignatureValidator implements SignatureValidator
             : Message::fromRawPostData();
 
         if ($message['Type'] === 'SubscriptionConfirmation') {
-            // Confirm the subscription by sending a GET request to the SubscribeURL
-            file_get_contents($message['SubscribeURL']);
+            $this->confirmSubscription($message);
         }
 
         return $validator->isValid($message);
+    }
+
+    protected function confirmSubscription(Message $message): void
+    {
+        file_get_contents($message['SubscribeURL']);
     }
 }
