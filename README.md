@@ -49,7 +49,7 @@ Route::mailgunFeedback('ses-feedback');
 
 ## Usage
 
-After following the installation instruction, your project is ready to handle feedback by Ses on the sent email campaigns.
+After following the installation instructions, your project is ready to handle feedback by Ses on the sent email campaigns.
 
 ### Testing
 
