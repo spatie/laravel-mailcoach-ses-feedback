@@ -24,9 +24,10 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "symfony/var-dumper": "^4.3",
+        "ext-json": "*",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "phpunit/phpunit": "^8.2",
-        "ext-json": "*"
+        "symfony/var-dumper": "^4.3"
     },
     "autoload": {
         "psr-4": {
