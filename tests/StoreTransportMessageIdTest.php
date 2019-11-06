@@ -3,7 +3,6 @@
 namespace Spatie\SesFeedback\Tests;
 
 use Illuminate\Mail\Events\MessageSent;
-use Spatie\EmailCampaigns\Jobs\SendMailJob;
 use Spatie\EmailCampaigns\Models\CampaignSend;
 use Swift_Message;
 
