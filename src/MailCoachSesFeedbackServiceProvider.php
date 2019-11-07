@@ -11,7 +11,7 @@ class MailCoachSesFeedbackServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        Route::macro('SesFeedback', function (string $url) {
+        Route::macro('sesFeedback', function (string $url) {
             return Route::post($url, '\Spatie\MailCoachSesFeedback\SesWebhookController');
         });
 
