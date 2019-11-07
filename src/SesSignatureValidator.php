@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\SesFeedback;
+namespace Spatie\MailCoachSesFeedback;
 
 use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;

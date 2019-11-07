@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\SesFeedback;
+namespace Spatie\MailCoachSesFeedback;
 
-use Spatie\EmailCampaigns\Models\CampaignSend;
+use Spatie\MailCoach\Models\CampaignSend;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
 class ProcessSesWebhookJob extends ProcessWebhookJob
@@ -11,7 +11,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
     {
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
-        /** @var \Spatie\EmailCampaigns\Models\CampaignSend $campaignSend */
+        /** @var \Spatie\MailCoach\Models\CampaignSend $campaignSend */
         $campaignSend = CampaignSend::findByTransportMessageId($payload['mail']['messageId']);
 
         if (! $campaignSend) {

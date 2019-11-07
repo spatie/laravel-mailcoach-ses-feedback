@@ -1,13 +1,13 @@
 <?php
 
-namespace Spatie\SesFeedback\Tests;
+namespace Spatie\MailCoachSesFeedback\Tests;
 
-use CreateEmailCampaignTables;
+use CreateMailCoachTables;
 use CreateWebhookCallsTable;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\EmailCampaigns\EmailCampaignsServiceProvider;
-use Spatie\SesFeedback\SesFeedbackServiceProvider;
+use Spatie\MailCoach\MailCoachServiceProvider;
+use Spatie\MailCoachSesFeedback\MailCoachSesFeedbackServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -15,7 +15,7 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__ . '/../vendor/spatie/laravel-email-campaigns/tests/database/factories');
+        $this->withFactories(__DIR__ . '/../vendor/spatie/laravel-mailcoach/tests/database/factories');
 
         Route::emailCampaigns('email-campaigns');
 
@@ -25,8 +25,8 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            EmailCampaignsServiceProvider::class,
-            SesFeedbackServiceProvider::class,
+            MailCoachServiceProvider::class,
+            MailCoachSesFeedbackServiceProvider::class,
         ];
     }
 
@@ -47,8 +47,8 @@ class TestCase extends Orchestra
         include_once __DIR__ . '/../vendor/spatie/laravel-webhook-client/database/migrations/create_webhook_calls_table.php.stub';
         (new CreateWebhookCallsTable())->up();
 
-        include_once __DIR__ . '/../vendor/spatie/laravel-email-campaigns/database/migrations/create_email_campaign_tables.php.stub';
-        (new CreateEmailCampaignTables())->up();
+        include_once __DIR__ . '/../vendor/spatie/laravel-mailcoach/database/migrations/create_mailcoach_tables.php.stub';
+        (new CreateMailCoachTables())->up();
     }
 
     public function getStub(): array

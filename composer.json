@@ -1,11 +1,11 @@
 {
-    "name": "spatie/laravel-email-campaigns-ses-feedback",
+    "name": "spatie/laravel-mailcoach-ses-feedback",
     "description": "Process feedback for email campaigns sent using Amazon SES",
     "keywords": [
         "spatie",
-        "laravel-email-campaigns-ses-feedback"
+        "laravel-mailcoach-ses-feedback"
     ],
-    "homepage": "https://github.com/spatie/laravel-email-campaigns-ses-feedback",
+    "homepage": "https://github.com/spatie/laravel-mailcoach-ses-feedback",
     "authors": [
         {
             "name": "Freek Van der Herten",
@@ -14,12 +14,18 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../laravel-mailcoach"
+        }
+    ],
     "require": {
         "php": "^7.3",
         "aws/aws-php-sns-message-validator": "^1.5",
         "illuminate/http": "^6.4",
         "orchestra/testbench": "^4.3",
-        "spatie/laravel-email-campaigns": "dev-master",
+        "spatie/laravel-mailcoach": "dev-master",
         "spatie/laravel-webhook-client": "^2.2",
         "ext-json": "*"
     },
@@ -31,12 +37,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\SesFeedback\\": "src"
+            "Spatie\\MailCoachSesFeedback\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\SesFeedback\\Tests\\": "tests"
+            "Spatie\\MailCoachSesFeedback\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,11 +55,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\SesFeedback\\SesFeedbackServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "Spatie\\SesFeedback\\SesFeedbackFacade"
-            }
+                "Spatie\\MailCoachSesFeedback\\MailCoachSesFeedbackServiceProvider"
+            ]
         }
     }
 }
