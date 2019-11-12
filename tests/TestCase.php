@@ -1,13 +1,14 @@
 <?php
 
-namespace Spatie\MailCoachSesFeedback\Tests;
+namespace Spatie\MailcoachSesFeedback\Tests;
 
 use CreateMailCoachTables;
 use CreateWebhookCallsTable;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\MailCoach\MailCoachServiceProvider;
-use Spatie\MailCoachSesFeedback\MailCoachSesFeedbackServiceProvider;
+use Spatie\BladeX\BladeXServiceProvider;
+use Spatie\Mailcoach\MailCoachServiceProvider;
+use Spatie\MailcoachSesFeedback\MailcoachSesFeedbackServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -17,7 +18,7 @@ class TestCase extends Orchestra
 
         $this->withFactories(__DIR__ . '/../vendor/spatie/laravel-mailcoach/tests/database/factories');
 
-        Route::emailCampaigns('email-campaigns');
+        Route::mailcoach('mailcoach');
 
         $this->setUpDatabase();
     }
@@ -26,7 +27,8 @@ class TestCase extends Orchestra
     {
         return [
             MailCoachServiceProvider::class,
-            MailCoachSesFeedbackServiceProvider::class,
+            MailcoachSesFeedbackServiceProvider::class,
+            BladeXServiceProvider::class,
         ];
     }
 

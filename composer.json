@@ -37,12 +37,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\MailCoachSesFeedback\\": "src"
+            "Spatie\\MailcoachSesFeedback\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\MailCoachSesFeedback\\Tests\\": "tests"
+            "Spatie\\MailcoachSesFeedback\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -55,7 +55,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\MailCoachSesFeedback\\MailCoachSesFeedbackServiceProvider"
+                "Spatie\\MailcoachSesFeedback\\MailCoachSesFeedbackServiceProvider"
             ]
         }
     }

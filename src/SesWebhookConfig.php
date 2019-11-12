@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\MailCoachSesFeedback;
+namespace Spatie\MailcoachSesFeedback;
 
 use Spatie\WebhookClient\Models\WebhookCall;
 use Spatie\WebhookClient\WebhookConfig;

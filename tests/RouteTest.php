@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\MailCoachSesFeedback\Tests;
+namespace Spatie\MailcoachSesFeedback\Tests;
 
 use Illuminate\Support\Facades\Route;
 
@@ -10,7 +10,7 @@ class RouteTest extends TestCase
     {
         parent::setUp();
 
-        Route::MailCoachSesFeedback('ses-feedback');
+        Route::sesFeedback('ses-feedback');
     }
 
     /** @test */

@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\MailCoachSesFeedback\Tests;
+namespace Spatie\MailcoachSesFeedback\Tests;
 
 use Illuminate\Mail\Events\MessageSent;
-use Spatie\MailCoach\Models\CampaignSend;
+use Spatie\Mailcoach\Models\CampaignSend;
 use Swift_Message;
 
 class StoreTransportMessageIdTest extends TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\MailCoachSesFeedback;
+namespace Spatie\MailcoachSesFeedback;
 
 use Illuminate\Mail\Events\MessageSent;
 
@@ -16,7 +16,7 @@ class StoreTransportMessageId
             return;
         }
 
-        /** @var \Spatie\MailCoach\Models\CampaignSend $campaignSend */
+        /** @var \Spatie\Mailcoach\Models\CampaignSend $campaignSend */
         $campaignSend = $event->data['campaignSend'];
 
         $transportMessageId = $event->message->getHeaders()->get('X-Ses-Message-ID')->getFieldBody();
