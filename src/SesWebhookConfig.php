@@ -10,7 +10,7 @@ class SesWebhookConfig
 {
     public static function get(): WebhookConfig
     {
-        $config = config('email-campaigns.mailgun_feedback');
+        $config = config('mailcoach.mailgun_feedback');
 
         return new WebhookConfig([
             'name' => 'ses-feedback',
