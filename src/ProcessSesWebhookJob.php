@@ -18,10 +18,34 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
             return;
         }
 
-        if ($payload['notificationType'] !== 'Bounce') {
+        if ($this->isPermanentBounce($payload)) {
+            $campaignSend->markAsBounced();
+
             return;
         }
 
-        $campaignSend->markAsBounced(strtolower($payload['bounce']['bounceType']));
+        if ($this->isComplaint($payload)) {
+            $campaignSend->complaintReceived();
+
+            return;
+        }
+    }
+
+    protected function isPermanentBounce(array $payload): bool
+    {
+        if ($payload['notificationType'] !== 'Bounce') {
+            return false;
+        }
+
+        if ($payload['bounce']['bounceType'] !== 'Permanent') {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function isComplaint(array $payload): bool
+    {
+        return $payload['notificationType'] === 'Complaint';
     }
 }

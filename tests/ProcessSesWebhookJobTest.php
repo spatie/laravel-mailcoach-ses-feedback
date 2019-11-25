@@ -3,7 +3,7 @@
 namespace Spatie\MailcoachSesFeedback\Tests;
 
 use Spatie\Mailcoach\Models\CampaignSend;
-use Spatie\Mailcoach\Models\CampaignSendBounce;
+use Spatie\Mailcoach\Models\CampaignSendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
 use Spatie\WebhookClient\Models\WebhookCall;
 
@@ -36,9 +36,8 @@ class ProcessSesWebhookJobTest extends TestCase
 
         $job->handle();
 
-        $this->assertEquals(1, CampaignSendBounce::count());
-        $this->assertEquals('permanent', CampaignSendBounce::first()->severity);
-        $this->assertTrue($this->campaignSend->is(CampaignSendBounce::first()->campaignSend));
+        $this->assertEquals(1, CampaignSendFeedbackItem::count());
+        $this->assertTrue($this->campaignSend->is(CampaignSendFeedbackItem::first()->campaignSend));
     }
 
     /** @test */
@@ -57,7 +56,7 @@ class ProcessSesWebhookJobTest extends TestCase
 
         $job->handle();
 
-        $this->assertEquals(0, CampaignSendBounce::count());
+        $this->assertEquals(0, CampaignSendFeedbackItem::count());
     }
 
     /** @test */
@@ -76,6 +75,6 @@ class ProcessSesWebhookJobTest extends TestCase
 
         $job->handle();
 
-        $this->assertEquals(0, CampaignSendBounce::count());
+        $this->assertEquals(0, CampaignSendFeedbackItem::count());
     }
 }
