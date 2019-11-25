@@ -2,12 +2,12 @@
 
 namespace Spatie\MailcoachSesFeedback\Tests;
 
-use CreateMailCoachTables;
+use CreateMailcoachTables;
 use CreateWebhookCallsTable;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\BladeX\BladeXServiceProvider;
-use Spatie\Mailcoach\MailCoachServiceProvider;
+use Spatie\Mailcoach\MailcoachServiceProvider;
 use Spatie\MailcoachSesFeedback\MailcoachSesFeedbackServiceProvider;
 
 class TestCase extends Orchestra
@@ -26,7 +26,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            MailCoachServiceProvider::class,
+            MailcoachServiceProvider::class,
             MailcoachSesFeedbackServiceProvider::class,
             BladeXServiceProvider::class,
         ];
@@ -50,7 +50,7 @@ class TestCase extends Orchestra
         (new CreateWebhookCallsTable())->up();
 
         include_once __DIR__ . '/../vendor/spatie/laravel-mailcoach/database/migrations/create_mailcoach_tables.php.stub';
-        (new CreateMailCoachTables())->up();
+        (new CreateMailcoachTables())->up();
     }
 
     public function getStub(): array

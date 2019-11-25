@@ -11,41 +11,17 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
     {
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
+        $messageId = $payload['mail']['messageId'];
+
         /** @var \Spatie\Mailcoach\Models\CampaignSend $campaignSend */
-        $campaignSend = CampaignSend::findByTransportMessageId($payload['mail']['messageId']);
+        $campaignSend = CampaignSend::findByTransportMessageId($messageId);
 
-        if (! $campaignSend) {
+        if (!$campaignSend) {
             return;
         }
 
-        if ($this->isPermanentBounce($payload)) {
-            $campaignSend->markAsBounced();
+        $sesEvent = SesEventFactory::createForPayload($payload);
 
-            return;
-        }
-
-        if ($this->isComplaint($payload)) {
-            $campaignSend->complaintReceived();
-
-            return;
-        }
-    }
-
-    protected function isPermanentBounce(array $payload): bool
-    {
-        if ($payload['notificationType'] !== 'Bounce') {
-            return false;
-        }
-
-        if ($payload['bounce']['bounceType'] !== 'Permanent') {
-            return false;
-        }
-
-        return true;
-    }
-
-    protected function isComplaint(array $payload): bool
-    {
-        return $payload['notificationType'] === 'Complaint';
+        $sesEvent->handle($campaignSend);
     }
 }

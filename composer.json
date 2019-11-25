@@ -55,7 +55,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\MailcoachSesFeedback\\MailCoachSesFeedbackServiceProvider"
+                "Spatie\\MailcoachSesFeedback\\MailcoachSesFeedbackServiceProvider"
             ]
         }
     }
