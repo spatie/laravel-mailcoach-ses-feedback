@@ -9,8 +9,6 @@ class ProcessSesWebhooksProfile implements WebhookProfile
 {
     public function shouldProcess(Request $request): bool
     {
-        $payload = json_decode($request->input());
-
-        return count($payload);
+        return count($request->input());
     }
 }
