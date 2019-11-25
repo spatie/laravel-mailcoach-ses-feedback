@@ -8,10 +8,11 @@ class Open extends SesEvent
 {
     public function canHandlePayload()
     {
-        return false;
+        return $this->payload['notificationType'] === 'Open';
     }
 
     public function handle(CampaignSend $campaignSend)
     {
+        $campaignSend->registerOpen();
     }
 }
