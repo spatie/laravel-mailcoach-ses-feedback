@@ -6,7 +6,7 @@ use Spatie\Mailcoach\Models\CampaignSend;
 
 class PermanentBounce extends SesEvent
 {
-    public function canHandlePayload()
+    public function canHandlePayload(): bool
     {
         if ($this->payload['notificationType'] !== 'Bounce') {
             return false;

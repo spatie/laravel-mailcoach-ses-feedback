@@ -6,7 +6,7 @@ use Spatie\Mailcoach\Models\CampaignSend;
 
 class Other extends SesEvent
 {
-    public function canHandlePayload()
+    public function canHandlePayload(): bool
     {
         return true;
     }

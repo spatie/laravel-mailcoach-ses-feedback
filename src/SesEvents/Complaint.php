@@ -6,7 +6,7 @@ use Spatie\Mailcoach\Models\CampaignSend;
 
 class Complaint extends SesEvent
 {
-    public function canHandlePayload()
+    public function canHandlePayload(): bool
     {
         return $this->payload['notificationType'] === 'Complaint';
     }

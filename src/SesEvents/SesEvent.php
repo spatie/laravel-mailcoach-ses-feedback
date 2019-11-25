@@ -14,7 +14,7 @@ abstract class SesEvent
         $this->payload = $payload;
     }
 
-    abstract public function canHandlePayload();
+    abstract public function canHandlePayload(): bool;
 
     abstract public function handle(CampaignSend $campaignSend);
 }
