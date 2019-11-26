@@ -13,6 +13,10 @@ class Open extends SesEvent
 
     public function handle(CampaignSend $campaignSend)
     {
+        if (! $campaignSend->campaign->track_opens) {
+            return;
+        }
+
         $campaignSend->registerOpen();
     }
 }

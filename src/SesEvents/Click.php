@@ -13,6 +13,10 @@ class Click extends SesEvent
 
     public function handle(CampaignSend $campaignSend)
     {
+        if (! $campaignSend->campaign->track_clicks) {
+            return;
+        }
+
         $campaignSend->registerClick($this->payload['click']['link']);
     }
 }
