@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback;
 
+use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ class MailcoachSesFeedbackServiceProvider extends ServiceProvider
             return Route::post($url, '\Spatie\MailcoachSesFeedback\SesWebhookController');
         });
 
+        Event::listen(MessageSending::class, AddConfigurationSetHeader::class);
         Event::listen(MessageSent::class, StoreTransportMessageId::class);
     }
 }
