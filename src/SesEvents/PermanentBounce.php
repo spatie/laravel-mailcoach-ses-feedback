@@ -21,6 +21,6 @@ class PermanentBounce extends SesEvent
 
     public function handle(CampaignSend $campaignSend)
     {
-        $campaignSend->markAsBounced();
+        $campaignSend->registerBounce();
     }
 }

@@ -13,6 +13,6 @@ class Complaint extends SesEvent
 
     public function handle(CampaignSend $campaignSend)
     {
-        $campaignSend->complaintReceived();
+        $campaignSend->registerComplaint();
     }
 }
