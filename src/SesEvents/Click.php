@@ -8,7 +8,7 @@ class Click extends SesEvent
 {
     public function canHandlePayload(): bool
     {
-        return $this->payload['notificationType'] === 'Click';
+        return $this->payload['eventType'] === 'Click';
     }
 
     public function handle(CampaignSend $campaignSend)

@@ -8,7 +8,7 @@ class Complaint extends SesEvent
 {
     public function canHandlePayload(): bool
     {
-        return $this->payload['notificationType'] === 'Complaint';
+        return $this->payload['eventType'] === 'Complaint';
     }
 
     public function handle(CampaignSend $campaignSend)

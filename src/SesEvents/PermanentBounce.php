@@ -8,7 +8,7 @@ class PermanentBounce extends SesEvent
 {
     public function canHandlePayload(): bool
     {
-        if ($this->payload['notificationType'] !== 'Bounce') {
+        if ($this->payload['eventType'] !== 'Bounce') {
             return false;
         }
 

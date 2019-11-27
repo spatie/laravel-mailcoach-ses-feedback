@@ -13,7 +13,6 @@ class SesWebhookConfig
 
         return new WebhookConfig([
             'name' => 'ses-feedback',
-            'signing_secret' => $config['signing_secret'],
             'header_name' => $config['header_name'] ?? 'Signature',
             'signature_validator' => $config['signature_validator'] ?? SesSignatureValidator::class,
             'webhook_profile' =>  $config['webhook_profile'] ?? ProcessSesWebhooksProfile::class,
