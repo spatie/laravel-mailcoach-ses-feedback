@@ -16,7 +16,7 @@ class RouteTest extends TestCase
     /** @test */
     public function it_provides_a_route_macro_to_handle_webhooks()
     {
-        $validPayload = $this->getStub();
+        $validPayload = $this->getStub('bounceWebhookContent');
 
         $response = $this->postJson('ses-feedback', $validPayload);
 

@@ -25,7 +25,7 @@ class SesSignatureValidatorTest extends TestCase
 
     private function validParams(array $overrides = []): array
     {
-        return array_merge($this->getStub(), $overrides);
+        return array_merge($this->getStub('bounceWebhookContent'), $overrides);
     }
 
     /** @test */

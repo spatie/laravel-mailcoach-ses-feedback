@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\Tests;
 
+use Aws\Sns\Message;
 use Spatie\Mailcoach\Models\CampaignSend;
 use Spatie\Mailcoach\Models\CampaignSendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
@@ -21,11 +22,11 @@ class ProcessSesWebhookJobTest extends TestCase
 
         $this->webhookCall = WebhookCall::create([
             'name' => 'ses',
-            'payload' => $this->getStub(),
+            'payload' => $this->getStub('bounceWebhookContent'),
         ]);
 
         $this->campaignSend = factory(CampaignSend::class)->create([
-            'transport_message_id' => '000001378603177f-7a5433e7-8edb-42ae-af10-f0181f34d6ee-000000',
+            'transport_message_id' => '0107016eb1654604-5f27d09d-872f-4a34-be34-c4e24741cb66-000000',
         ]);
     }
 
@@ -38,25 +39,6 @@ class ProcessSesWebhookJobTest extends TestCase
 
         $this->assertEquals(1, CampaignSendFeedbackItem::count());
         $this->assertTrue($this->campaignSend->is(CampaignSendFeedbackItem::first()->campaignSend));
-    }
-
-    /** @test */
-    public function it_only_saves_when_event_is_a_failure()
-    {
-        $data = $this->webhookCall->payload;
-        $message = json_decode($data['Message'], true);
-        $message['notificationType'] = 'Delivery';
-        $data['Message'] = json_encode($message);
-
-        $this->webhookCall->update([
-            'payload' => $data,
-        ]);
-
-        $job = new ProcessSesWebhookJob($this->webhookCall);
-
-        $job->handle();
-
-        $this->assertEquals(0, CampaignSendFeedbackItem::count());
     }
 
     /** @test */
