@@ -7,7 +7,7 @@ use Swift_Message;
 
 class AddConfigurationSetHeaderTest extends TestCase
 {
-    /** @test * */
+    /** @test **/
     public function it_adds_a_configuration_set_header()
     {
         $message = new Swift_Message('Test', 'body');

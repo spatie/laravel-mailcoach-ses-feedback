@@ -2,8 +2,6 @@
 
 namespace Spatie\MailcoachSesFeedback\Tests;
 
-use Aws\Sns\Message;
-use Spatie\Mailcoach\Models\CampaignClick;
 use Spatie\Mailcoach\Models\CampaignSend;
 use Spatie\Mailcoach\Models\CampaignSendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
@@ -11,11 +9,9 @@ use Spatie\WebhookClient\Models\WebhookCall;
 
 class ProcessSesWebhookJobTest extends TestCase
 {
-    /** @var \Spatie\WebhookClient\Models\WebhookCall */
-    private $webhookCall;
+    private WebhookCall $webhookCall;
 
-    /** @var \Spatie\Mailcoach\Models\CampaignSend */
-    private $campaignSend;
+    private CampaignSend $campaignSend;
 
     public function setUp(): void
     {

@@ -5,14 +5,13 @@ namespace Spatie\MailcoachSesFeedback\Tests;
 use Illuminate\Http\Request;
 use Spatie\MailcoachSesFeedback\SesSignatureValidator;
 use Spatie\MailcoachSesFeedback\SesWebhookConfig;
+use Spatie\WebhookClient\WebhookConfig;
 
 class SesSignatureValidatorTest extends TestCase
 {
-    /** @var \Spatie\WebhookClient\WebhookConfig */
-    private $config;
+    private WebhookConfig $config;
 
-    /** @var \Spatie\MailcoachSesFeedback\SesSignatureValidator */
-    private $validator;
+    private SesSignatureValidator $validator;
 
     public function setUp(): void
     {
