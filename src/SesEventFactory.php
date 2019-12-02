@@ -11,7 +11,7 @@ use Spatie\MailcoachSesFeedback\SesEvents\SesEvent;
 
 class SesEventFactory
 {
-    protected static $sesEvents = [
+    protected static array $sesEvents = [
         Click::class,
         Complaint::class,
         Open::class,
@@ -21,12 +21,8 @@ class SesEventFactory
     public static function createForPayload(array $payload): SesEvent
     {
         $sesEvent = collect(static::$sesEvents)
-            ->map(function (string $sesEventClass) use ($payload) {
-                return new $sesEventClass($payload);
-            })
-            ->first(function (SesEvent $sesEvent) use ($payload) {
-                return $sesEvent->canHandlePayload();
-            });
+            ->map(fn (string $sesEventClass) => new $sesEventClass($payload))
+            ->first(fn (SesEvent $sesEvent) => $sesEvent->canHandlePayload());
 
         return $sesEvent ?? new Other($payload);
     }

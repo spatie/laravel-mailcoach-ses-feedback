@@ -6,8 +6,7 @@ use Spatie\Mailcoach\Models\CampaignSend;
 
 abstract class SesEvent
 {
-    /** @var array */
-    protected $payload;
+    protected array $payload;
 
     public function __construct(array $payload)
     {

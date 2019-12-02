@@ -3,6 +3,7 @@
 namespace Spatie\MailcoachSesFeedback;
 
 use Aws\Sns\Message;
+use Exception;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\WebhookProfile\WebhookProfile;
 
@@ -13,7 +14,7 @@ class ProcessSesWebhooksProfile implements WebhookProfile
         try {
             $message = Message::fromRawPostData();
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
