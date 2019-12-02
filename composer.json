@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.4",
         "aws/aws-php-sns-message-validator": "^1.5",
         "illuminate/http": "^6.4",
         "orchestra/testbench": "^4.3",
@@ -32,7 +32,7 @@
     "require-dev": {
         "ext-json": "*",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "phpunit/phpunit": "^8.2",
+        "phpunit/phpunit": "^8.4",
         "symfony/var-dumper": "^4.3"
     },
     "autoload": {
