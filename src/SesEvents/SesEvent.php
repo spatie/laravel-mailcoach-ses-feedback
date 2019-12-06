@@ -2,7 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\SesEvents;
 
-use Spatie\Mailcoach\Models\CampaignSend;
+use Spatie\Mailcoach\Models\Send;
 
 abstract class SesEvent
 {
@@ -15,5 +15,5 @@ abstract class SesEvent
 
     abstract public function canHandlePayload(): bool;
 
-    abstract public function handle(CampaignSend $campaignSend);
+    abstract public function handle(Send $send);
 }

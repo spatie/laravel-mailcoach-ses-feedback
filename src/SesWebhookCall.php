@@ -9,7 +9,7 @@ use Spatie\WebhookClient\WebhookConfig;
 
 class SesWebhookCall extends WebhookCall
 {
-    protected string $table = 'webhook_calls';
+    protected $table = 'webhook_calls';
 
     public static function storeWebhook(WebhookConfig $config, Request $request): WebhookCall
     {

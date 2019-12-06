@@ -2,7 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\SesEvents;
 
-use Spatie\Mailcoach\Models\CampaignSend;
+use Spatie\Mailcoach\Models\Send;
 
 class Open extends SesEvent
 {
@@ -11,12 +11,12 @@ class Open extends SesEvent
         return $this->payload['eventType'] === 'Open';
     }
 
-    public function handle(CampaignSend $campaignSend)
+    public function handle(Send $send)
     {
-        if (! $campaignSend->campaign->track_opens) {
+        if (! $send->campaign->track_opens) {
             return;
         }
 
-        $campaignSend->registerOpen();
+        $send->registerOpen();
     }
 }

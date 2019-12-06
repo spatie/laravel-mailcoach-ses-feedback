@@ -2,7 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\SesEvents;
 
-use Spatie\Mailcoach\Models\CampaignSend;
+use Spatie\Mailcoach\Models\Send;
 
 class Complaint extends SesEvent
 {
@@ -11,8 +11,8 @@ class Complaint extends SesEvent
         return $this->payload['eventType'] === 'Complaint';
     }
 
-    public function handle(CampaignSend $campaignSend)
+    public function handle(Send $send)
     {
-        $campaignSend->registerComplaint();
+        $send->registerComplaint();
     }
 }

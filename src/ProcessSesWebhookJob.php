@@ -2,7 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback;
 
-use Spatie\Mailcoach\Models\CampaignSend;
+use Spatie\Mailcoach\Models\Send;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
 class ProcessSesWebhookJob extends ProcessWebhookJob
@@ -13,15 +13,15 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         $messageId = $payload['mail']['messageId'];
 
-        /** @var \Spatie\Mailcoach\Models\CampaignSend $campaignSend */
-        $campaignSend = CampaignSend::findByTransportMessageId($messageId);
+        /** @var \Spatie\Mailcoach\Models\Send $send */
+        $send = Send::findByTransportMessageId($messageId);
 
-        if (!$campaignSend) {
+        if (!$send) {
             return;
         }
 
         $sesEvent = SesEventFactory::createForPayload($payload);
 
-        $sesEvent->handle($campaignSend);
+        $sesEvent->handle($send);
     }
 }

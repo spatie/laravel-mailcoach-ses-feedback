@@ -2,8 +2,8 @@
 
 namespace Spatie\MailcoachSesFeedback\Tests;
 
-use Spatie\Mailcoach\Models\CampaignSend;
-use Spatie\Mailcoach\Models\CampaignSendFeedbackItem;
+use Spatie\Mailcoach\Models\Send;
+use Spatie\Mailcoach\Models\SendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
 use Spatie\WebhookClient\Models\WebhookCall;
 
@@ -11,7 +11,7 @@ class ProcessSesWebhookJobTest extends TestCase
 {
     private WebhookCall $webhookCall;
 
-    private CampaignSend $campaignSend;
+    private Send $send;
 
     public function setUp(): void
     {
@@ -22,7 +22,7 @@ class ProcessSesWebhookJobTest extends TestCase
             'payload' => $this->getStub('bounceWebhookContent'),
         ]);
 
-        $this->campaignSend = factory(CampaignSend::class)->create([
+        $this->send = factory(Send::class)->create([
             'transport_message_id' => '0107016eb1654604-5f27d09d-872f-4a34-be34-c4e24741cb66-000000',
         ]);
     }
@@ -34,10 +34,10 @@ class ProcessSesWebhookJobTest extends TestCase
 
         $job->handle();
 
-        $this->assertEquals(1, CampaignSendFeedbackItem::count());
-        tap(CampaignSendFeedbackItem::first(), function (CampaignSendFeedbackItem $campaignSendFeedbackItem) {
-            $this->assertTrue($this->campaignSend->is($campaignSendFeedbackItem->campaignSend));
-            $this->assertEquals('bounce', $campaignSendFeedbackItem->type);
+        $this->assertEquals(1, SendFeedbackItem::count());
+        tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
+            $this->assertTrue($this->send->is($sendFeedbackItem->send));
+            $this->assertEquals('bounce', $sendFeedbackItem->type);
         });
     }
 
@@ -49,15 +49,15 @@ class ProcessSesWebhookJobTest extends TestCase
             'payload' => $this->getStub('clickWebhookContent'),
         ]);
 
-        /** @var CampaignSend $campaignSend */
-        $campaignSend = factory(CampaignSend::class)->create([
+        /** @var Send $send */
+        $send = factory(Send::class)->create([
             'transport_message_id' => '0107016eb14a6683-21d61476-4ac8-4eb2-aa71-79209c70e8a4-000000',
         ]);
-        $campaignSend->campaign->update(['track_clicks' => true]);
+        $send->campaign->update(['track_clicks' => true]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();
 
-        $this->assertEquals(1, $campaignSend->clicks->count());
+        $this->assertEquals(1, $send->clicks->count());
     }
 
     /** @test */
@@ -68,15 +68,15 @@ class ProcessSesWebhookJobTest extends TestCase
             'payload' => $this->getStub('openWebhookContent'),
         ]);
 
-        /** @var CampaignSend $campaignSend */
-        $campaignSend = factory(CampaignSend::class)->create([
+        /** @var Send $send */
+        $send = factory(Send::class)->create([
             'transport_message_id' => '0107016eb143be75-4e95d17b-1251-4abe-b75f-f0eccf0c11ac-000000',
         ]);
-        $campaignSend->campaign->update(['track_opens' => true]);
+        $send->campaign->update(['track_opens' => true]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();
 
-        $this->assertEquals(1, $campaignSend->opens->count());
+        $this->assertEquals(1, $send->opens->count());
     }
 
     /** @test */
@@ -87,17 +87,17 @@ class ProcessSesWebhookJobTest extends TestCase
             'payload' => $this->getStub('complaintWebhookContent'),
         ]);
 
-        /** @var CampaignSend $campaignSend */
-        $campaignSend = factory(CampaignSend::class)->create([
+        /** @var Send $send */
+        $send = factory(Send::class)->create([
             'transport_message_id' => '0107016eb149cd22-7b2d056e-8298-4cb2-b716-d7d85935a752-000000',
         ]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();
 
-        $this->assertEquals(1, CampaignSendFeedbackItem::count());
-        tap(CampaignSendFeedbackItem::first(), function (CampaignSendFeedbackItem $campaignSendFeedbackItem) use ($campaignSend) {
-            $this->assertTrue($campaignSend->is($campaignSendFeedbackItem->campaignSend));
-            $this->assertEquals('complaint', $campaignSendFeedbackItem->type);
+        $this->assertEquals(1, SendFeedbackItem::count());
+        tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) use ($send) {
+            $this->assertTrue($send->is($sendFeedbackItem->send));
+            $this->assertEquals('complaint', $sendFeedbackItem->type);
         });
     }
 
@@ -117,6 +117,6 @@ class ProcessSesWebhookJobTest extends TestCase
 
         $job->handle();
 
-        $this->assertEquals(0, CampaignSendFeedbackItem::count());
+        $this->assertEquals(0, SendFeedbackItem::count());
     }
 }

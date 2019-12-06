@@ -2,7 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\SesEvents;
 
-use Spatie\Mailcoach\Models\CampaignSend;
+use Spatie\Mailcoach\Models\Send;
 
 class Click extends SesEvent
 {
@@ -11,8 +11,8 @@ class Click extends SesEvent
         return $this->payload['eventType'] === 'Click';
     }
 
-    public function handle(CampaignSend $campaignSend)
+    public function handle(Send $send)
     {
-        $campaignSend->registerClick($this->payload['click']['link']);
+        $send->registerClick($this->payload['click']['link']);
     }
 }
