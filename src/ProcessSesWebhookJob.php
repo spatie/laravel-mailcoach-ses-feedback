@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback;
 
+use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
@@ -11,7 +12,9 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
     {
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
-        $messageId = $payload['mail']['messageId'];
+        if (! $messageId = Arr::get($payload, 'mail.messageId')) {
+            return;
+        };
 
         /** @var \Spatie\Mailcoach\Models\Send $send */
         $send = Send::findByTransportMessageId($messageId);
