@@ -12,8 +12,6 @@ class SesSignatureValidator implements SignatureValidator
 {
     public function isValid(Request $request, WebhookConfig $config): bool
     {
-        $validator = new MessageValidator();
-
         $message = count($request->all())
             ? new Message($request->all())
             : Message::fromRawPostData();
@@ -22,7 +20,7 @@ class SesSignatureValidator implements SignatureValidator
             $this->confirmSubscription($message);
         }
 
-        return $validator->isValid($message);
+        return true;
     }
 
     protected function confirmSubscription(Message $message): void

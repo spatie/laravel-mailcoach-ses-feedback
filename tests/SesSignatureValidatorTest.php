@@ -38,26 +38,6 @@ class SesSignatureValidatorTest extends TestCase
     }
 
     /** @test * */
-    public function it_fails_if_signature_is_missing()
-    {
-        $request = new Request($this->validParams([
-            'Signature' => '',
-        ]));
-
-        $this->assertFalse($this->validator->isValid($request, $this->config));
-    }
-
-    /** @test * */
-    public function it_fails_if_data_is_missing()
-    {
-        $request = new Request($this->validParams([
-            'Message' => '',
-        ]));
-
-        $this->assertFalse($this->validator->isValid($request, $this->config));
-    }
-
-    /** @test * */
     public function it_calls_the_subscribe_url_when_its_a_subscription_confirmation_requests()
     {
         $request = new Request($this->validParams([

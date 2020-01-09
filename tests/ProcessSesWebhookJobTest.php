@@ -5,6 +5,7 @@ namespace Spatie\MailcoachSesFeedback\Tests;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\Mailcoach\Models\SendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
+use Spatie\MailcoachSesFeedback\SesWebhookCall;
 use Spatie\WebhookClient\Models\WebhookCall;
 
 class ProcessSesWebhookJobTest extends TestCase
@@ -25,6 +26,40 @@ class ProcessSesWebhookJobTest extends TestCase
         $this->send = factory(Send::class)->create([
             'transport_message_id' => '0107016eb1654604-5f27d09d-872f-4a34-be34-c4e24741cb66-000000',
         ]);
+    }
+
+    /** @test * */
+    public function it_does_nothing_and_deletes_the_call_if_signature_is_missing()
+    {
+        $data = $this->getStub('bounceWebhookContent');
+        $data['Signature'] = null;
+
+        $this->webhookCall->update([
+            'payload' => json_encode($data),
+        ]);
+
+        $job = new ProcessSesWebhookJob($this->webhookCall);
+
+        $job->handle();
+        $this->assertEquals(0, SendFeedbackItem::count());
+        $this->assertEquals(0, SesWebhookCall::count());
+    }
+
+    /** @test * */
+    public function it_does_nothing_if_data_is_missing()
+    {
+        $data = $this->getStub('bounceWebhookContent');
+        $data['Message'] = '';
+
+        $this->webhookCall->update([
+            'payload' => json_encode($data),
+        ]);
+
+        $job = new ProcessSesWebhookJob($this->webhookCall);
+
+        $job->handle();
+        $this->assertEquals(0, SendFeedbackItem::count());
+        $this->assertEquals(0, SesWebhookCall::count());
     }
 
     /** @test */
