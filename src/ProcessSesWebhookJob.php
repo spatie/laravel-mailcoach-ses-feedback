@@ -4,6 +4,7 @@ namespace Spatie\MailcoachSesFeedback;
 
 use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
+use Exception;
 use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\WebhookClient\Models\WebhookCall;
@@ -24,7 +25,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         try {
             $message = Message::fromJsonString(json_encode($this->webhookCall->payload));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->webhookCall->delete();
             return;
         }
