@@ -25,7 +25,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         try {
             $message = Message::fromJsonString(json_encode($this->webhookCall->payload));
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             $this->webhookCall->delete();
             return;
         }
