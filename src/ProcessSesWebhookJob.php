@@ -21,23 +21,15 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
     public function handle()
     {
-        $validator = new MessageValidator();
-
-        try {
-            $message = Message::fromJsonString(json_encode($this->webhookCall->payload));
-        } catch (Exception $exception) {
+        if (! $message = $this->getMessageFromWebhookCall()) {
             $this->webhookCall->delete();
-            return;
-        }
 
-        if (! $validator->isValid($message)) {
-            $this->webhookCall->delete();
             return;
         }
 
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
-        if (! $messageId = Arr::get($payload, 'mail.messageId')) {
+        if (!$messageId = Arr::get($payload, 'mail.messageId')) {
             return;
         };
 
@@ -51,5 +43,22 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         $sesEvent = SesEventFactory::createForPayload($payload);
 
         $sesEvent->handle($send);
+    }
+
+    protected function getMessageFromWebhookCall(): ?Message
+    {
+        $validator = new MessageValidator();
+
+        try {
+            $message = Message::fromJsonString(json_encode($this->webhookCall->payload));
+        } catch (Exception $exception) {
+            return null;
+        }
+
+        if (!$validator->isValid($message)) {
+            return null;
+        }
+
+        return $message;
     }
 }
