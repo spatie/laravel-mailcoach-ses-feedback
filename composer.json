@@ -16,22 +16,21 @@
     ],
     "repositories": [
         {
-            "type": "path",
-            "url": "../laravel-mailcoach"
+            "type": "composer",
+            "url": "https://satis.mailcoach.app"
         }
     ],
     "require": {
+        "ext-json": "*"
         "php": "^7.4",
         "aws/aws-php-sns-message-validator": "^1.5",
         "illuminate/http": "^6.4",
-        "orchestra/testbench": "^4.3",
-        "spatie/laravel-mailcoach": "dev-master",
+        "spatie/laravel-mailcoach": "^1.0",
         "spatie/laravel-webhook-client": "^2.2",
-        "ext-json": "*"
     },
     "require-dev": {
-        "ext-json": "*",
         "friendsofphp/php-cs-fixer": "^2.16",
+        "orchestra/testbench": "^4.3",
         "phpunit/phpunit": "^8.4",
         "symfony/var-dumper": "^4.3"
     },
