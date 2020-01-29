@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "ext-json": "*"
+        "ext-json": "*",
         "php": "^7.4",
         "aws/aws-php-sns-message-validator": "^1.5",
         "illuminate/http": "^6.4",
