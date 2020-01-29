@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\Tests;
 
+use Exception;
 use Illuminate\Http\Request;
 use Spatie\MailcoachSesFeedback\SesSignatureValidator;
 use Spatie\MailcoachSesFeedback\SesWebhookConfig;
@@ -46,7 +47,7 @@ class SesSignatureValidatorTest extends TestCase
             'Token' => '',
         ]));
 
-        $this->expectExceptionMessage("file_get_contents(".url('test-route')."): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found");
+        $this->expectException(Exception::class);
 
         $this->validator->isValid($request, $this->config);
     }
