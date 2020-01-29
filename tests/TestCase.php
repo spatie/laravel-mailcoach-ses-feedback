@@ -16,7 +16,7 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        $this->withFactories(__DIR__ . '/../vendor/spatie/laravel-mailcoach/tests/database/factories');
+        $this->withFactories(__DIR__ . '/../vendor/spatie/laravel-mailcoach/database/factories');
 
         Route::mailcoach('mailcoach');
 
