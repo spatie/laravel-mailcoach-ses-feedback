@@ -16,6 +16,11 @@ class AddConfigurationSetHeader
             return;
         }
 
+        if (! $event->message->getHeaders()->get('X-MAILCOACH')) {
+            return;
+        }
+
+        $event->message->getHeaders()->removeAll('X-SES-CONFIGURATION-SET');
         $event->message->getHeaders()->addTextHeader('X-SES-CONFIGURATION-SET', $configuration_set);
     }
 }

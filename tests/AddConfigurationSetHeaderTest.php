@@ -8,9 +8,10 @@ use Swift_Message;
 class AddConfigurationSetHeaderTest extends TestCase
 {
     /** @test **/
-    public function it_adds_a_configuration_set_header()
+    public function it_adds_a_configuration_set_header_if_the_message_is_sent_by_mailcoach()
     {
         $message = new Swift_Message('Test', 'body');
+        $message->getHeaders()->addTextHeader('X-MAILCOACH', true);
 
         config()->set('mailcoach.ses_feedback.configuration_set', 'hello');
         config()->set('mail.driver', 'ses');
