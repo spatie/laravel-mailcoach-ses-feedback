@@ -4,6 +4,7 @@ namespace Spatie\MailcoachSesFeedback\Tests;
 
 use CreateMailcoachTables;
 use CreateWebhookCallsTable;
+use CreateMailcoachSesTables;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\BladeX\BladeXServiceProvider;
@@ -51,6 +52,9 @@ class TestCase extends Orchestra
 
         include_once __DIR__ . '/../vendor/spatie/laravel-mailcoach/database/migrations/create_mailcoach_tables.php.stub';
         (new CreateMailcoachTables())->up();
+
+        include_once __DIR__ . '/../database/migrations/create_mailcoach_ses_tables.php.stub';
+        (new CreateMailcoachSesTables())->up();
     }
 
     public function getStub(string $name): array

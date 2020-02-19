@@ -1,0 +1,19 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateMailcoachSesTables extends Migration
+{
+    public function up()
+    {
+        Schema::create('mailcoach_ses_processed_messages', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('ses_message_id');
+
+            $table->timestamps();
+        });
+
+    }
+}
