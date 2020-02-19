@@ -6,6 +6,7 @@ use Aws\Sns\Message;
 use Exception;
 use Illuminate\Http\Request;
 use Spatie\WebhookClient\WebhookProfile\WebhookProfile;
+use Spatie\MailcoachSesFeedback\Models\SesProcessedMessage;
 
 class ProcessSesWebhooksProfile implements WebhookProfile
 {
@@ -13,7 +14,8 @@ class ProcessSesWebhooksProfile implements WebhookProfile
     {
         try {
             $message = Message::fromRawPostData();
-            return true;
+
+            return !SesProcessedMessage::whereSesMessageId($message->MessageId)->exists();
         } catch (Exception $e) {
             return false;
         }
