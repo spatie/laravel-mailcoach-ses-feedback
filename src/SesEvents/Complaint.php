@@ -14,5 +14,7 @@ class Complaint extends SesEvent
     public function handle(Send $send)
     {
         $send->registerComplaint();
+
+        $this->storeSESMessageId();
     }
 }

@@ -14,5 +14,7 @@ class Click extends SesEvent
     public function handle(Send $send)
     {
         $send->registerClick($this->payload['click']['link']);
+
+        $this->storeSESMessageId();
     }
 }

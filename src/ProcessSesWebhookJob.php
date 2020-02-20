@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\WebhookClient\Models\WebhookCall;
 use Spatie\WebhookClient\ProcessWebhookJob;
+use Spatie\MailcoachSesFeedback\Models\SesProcessedMessage;
 
 class ProcessSesWebhookJob extends ProcessWebhookJob
 {
@@ -28,6 +29,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         }
 
         $payload = json_decode($this->webhookCall->payload['Message'], true);
+        $payload['SesMessageId'] = $this->webhookCall->payload['MessageId'];
 
         if (!$messageId = Arr::get($payload, 'mail.messageId')) {
             return;
@@ -41,6 +43,10 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         }
 
         $sesEvent = SesEventFactory::createForPayload($payload);
+
+        if (SesProcessedMessage::whereSesMessageId($payload['SesMessageId'])->exists()) {
+            return;
+        }
 
         $sesEvent->handle($send);
     }

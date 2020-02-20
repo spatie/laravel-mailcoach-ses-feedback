@@ -18,5 +18,7 @@ class Open extends SesEvent
         }
 
         $send->registerOpen();
+
+        $this->storeSESMessageId();
     }
 }

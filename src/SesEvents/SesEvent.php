@@ -3,6 +3,7 @@
 namespace Spatie\MailcoachSesFeedback\SesEvents;
 
 use Spatie\Mailcoach\Models\Send;
+use Spatie\MailcoachSesFeedback\Models\SesProcessedMessage;
 
 abstract class SesEvent
 {
@@ -16,4 +17,12 @@ abstract class SesEvent
     abstract public function canHandlePayload(): bool;
 
     abstract public function handle(Send $send);
+
+    public function storeSESMessageId() {
+
+        SesProcessedMessage::create([
+            'ses_message_id' => $this->payload['SesMessageId']
+        ]);
+
+    }
 }
