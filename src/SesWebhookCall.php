@@ -21,7 +21,8 @@ class SesWebhookCall extends WebhookCall
         ]);
     }
 
-    public function identicalMessageExists() {
+    public function identicalMessageExists(): bool
+    {
         return SesWebhookCall::where('id', '<>', $this->id)
                                 ->where('payload->MessageId', $this->payload['MessageId'])
                                 ->exists();
