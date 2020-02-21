@@ -21,7 +21,9 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
     public function handle()
     {
-        if ($this->webhookCall->identicalMessageExists()) {
+        if (! $this->webhookCall->isFirstOfThisSesMessage()) {
+            $this->webhookCall->delete();
+
             return;
         }
 

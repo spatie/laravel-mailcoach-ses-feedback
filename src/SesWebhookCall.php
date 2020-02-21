@@ -21,10 +21,10 @@ class SesWebhookCall extends WebhookCall
         ]);
     }
 
-    public function identicalMessageExists(): bool
+    public function isFirstOfThisSesMessage(): bool
     {
-        return SesWebhookCall::where('id', '<>', $this->id)
-                                ->where('payload->MessageId', $this->payload['MessageId'])
-                                ->exists();
+        $first = SesWebhookCall::where('payload->MessageId', $this->payload['MessageId'])
+                                    ->min('id');
+        return $this->id === $first;
     }
 }
