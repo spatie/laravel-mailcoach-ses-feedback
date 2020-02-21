@@ -10,7 +10,7 @@ use Spatie\WebhookClient\Models\WebhookCall;
 
 class ProcessSesWebhookJobTest extends TestCase
 {
-    private WebhookCall $webhookCall;
+    private SesWebhookCall $webhookCall;
 
     private Send $send;
 
@@ -18,7 +18,7 @@ class ProcessSesWebhookJobTest extends TestCase
     {
         parent::setUp();
 
-        $this->webhookCall = WebhookCall::create([
+        $this->webhookCall = SesWebhookCall::create([
             'name' => 'ses',
             'payload' => $this->getStub('bounceWebhookContent'),
         ]);
@@ -79,7 +79,7 @@ class ProcessSesWebhookJobTest extends TestCase
     /** @test */
     public function it_processes_a_ses_webhook_call_for_clicks()
     {
-        $webhookCall = WebhookCall::create([
+        $webhookCall = SesWebhookCall::create([
             'name' => 'ses',
             'payload' => $this->getStub('clickWebhookContent'),
         ]);
@@ -98,7 +98,7 @@ class ProcessSesWebhookJobTest extends TestCase
     /** @test */
     public function it_processes_a_ses_webhook_call_for_opens()
     {
-        $webhookCall = WebhookCall::create([
+        $webhookCall = SesWebhookCall::create([
             'name' => 'ses',
             'payload' => $this->getStub('openWebhookContent'),
         ]);
@@ -117,7 +117,7 @@ class ProcessSesWebhookJobTest extends TestCase
     /** @test */
     public function it_processes_a_ses_webhook_call_for_complaints()
     {
-        $webhookCall = WebhookCall::create([
+        $webhookCall = SesWebhookCall::create([
             'name' => 'ses',
             'payload' => $this->getStub('complaintWebhookContent'),
         ]);
