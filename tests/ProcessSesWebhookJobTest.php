@@ -154,4 +154,20 @@ class ProcessSesWebhookJobTest extends TestCase
 
         $this->assertEquals(0, SendFeedbackItem::count());
     }
+
+    /** @test * */
+    public function it_does_nothing_and_deletes_the_call_if_it_is_a_duplicate_ses_message_id()
+    {
+        $webhookCallSecond = SesWebhookCall::create([
+            'name' => 'ses',
+            'payload' => $this->getStub('bounceWebhookContent'),
+        ]);
+
+        (new ProcessSesWebhookJob($this->webhookCall))->handle();
+        (new ProcessSesWebhookJob($webhookCallSecond))->handle();
+
+        $this->assertEquals(1, SendFeedbackItem::count());
+        $this->assertEquals(1, SesWebhookCall::count());
+    }
+
 }
