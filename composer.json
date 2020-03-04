@@ -24,7 +24,7 @@
         "ext-json": "*",
         "php": "^7.4",
         "aws/aws-php-sns-message-validator": "^1.6",
-        "illuminate/http": "^6.4",
+        "illuminate/http": "^6.4|^7.0",
         "spatie/laravel-mailcoach": "^1.6.10|^2.0",
         "spatie/laravel-webhook-client": "^2.4"
     },
