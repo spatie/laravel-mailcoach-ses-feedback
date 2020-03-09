@@ -28,7 +28,6 @@ class TestCase extends Orchestra
         return [
             MailcoachServiceProvider::class,
             MailcoachSesFeedbackServiceProvider::class,
-            BladeXServiceProvider::class,
         ];
     }
 
