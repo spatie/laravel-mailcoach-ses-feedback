@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.0.0 - 2020-03-10
+
+- Add support for Mailcoach v2
+
 ## 1.3.1 - 2020-03-04
 
 - Add Laravel 7 support
