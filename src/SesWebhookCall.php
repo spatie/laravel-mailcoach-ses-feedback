@@ -20,4 +20,11 @@ class SesWebhookCall extends WebhookCall
             'payload' => $message->toArray(),
         ]);
     }
+
+    public function isFirstOfThisSesMessage(): bool
+    {
+        $firstMessageId = (int) SesWebhookCall::where('payload->MessageId', $this->payload['MessageId'])->min('id');
+
+        return $this->id === $firstMessageId;
+    }
 }

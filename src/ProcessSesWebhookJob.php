@@ -27,6 +27,12 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
             return;
         }
 
+        if (! $this->webhookCall->isFirstOfThisSesMessage()) {
+            $this->webhookCall->delete();
+
+            return;
+        }
+
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
         if (!$messageId = Arr::get($payload, 'mail.messageId')) {
