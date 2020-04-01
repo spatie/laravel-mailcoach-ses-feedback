@@ -2,6 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\Tests;
 
+use Carbon\Carbon;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\Mailcoach\Models\SendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
@@ -73,6 +74,7 @@ class ProcessSesWebhookJobTest extends TestCase
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
             $this->assertTrue($this->send->is($sendFeedbackItem->send));
             $this->assertEquals('bounce', $sendFeedbackItem->type);
+            $this->assertEquals(Carbon::parse('2019-11-28T09:43:55.547Z'), $sendFeedbackItem->created_at);
         });
     }
 
@@ -133,6 +135,7 @@ class ProcessSesWebhookJobTest extends TestCase
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) use ($send) {
             $this->assertTrue($send->is($sendFeedbackItem->send));
             $this->assertEquals('complaint', $sendFeedbackItem->type);
+            $this->assertEquals(Carbon::parse('2019-11-28T09:13:57.357Z'), $sendFeedbackItem->created_at);
         });
     }
 
