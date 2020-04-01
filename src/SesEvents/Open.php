@@ -17,6 +17,6 @@ class Open extends SesEvent
             return;
         }
 
-        $send->registerOpen();
+        $send->registerOpen($this->getTimestamp());
     }
 }
