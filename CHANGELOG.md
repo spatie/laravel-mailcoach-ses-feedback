@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.1.1 - 2020-04-03
+
+- fix confirming of subscriptions in AWS
+
 ## 2.1.0 - 2020-03-20
 
 - add ability to use a custom queue connection

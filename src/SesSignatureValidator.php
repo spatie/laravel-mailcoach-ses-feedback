@@ -3,7 +3,6 @@
 namespace Spatie\MailcoachSesFeedback;
 
 use Aws\Sns\Message;
-use Aws\Sns\MessageValidator;
 use Illuminate\Http\Request;
 use RuntimeException;
 use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
@@ -14,9 +13,7 @@ class SesSignatureValidator implements SignatureValidator
     public function isValid(Request $request, WebhookConfig $config): bool
     {
         try {
-            $message = count($request->all())
-                ? new Message($request->all())
-                : Message::fromRawPostData();
+            $message = Message::fromJsonString((string) $request->getContent());
 
             if ($message['Type'] === 'SubscriptionConfirmation') {
                 $this->confirmSubscription($message);

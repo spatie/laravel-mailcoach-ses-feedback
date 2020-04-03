@@ -31,7 +31,7 @@ class SesSignatureValidatorTest extends TestCase
     /** @test */
     public function it_requires_signature_data()
     {
-        $request = new Request($this->validParams());
+        $request = Request::create('/ses-feedback', 'POST', [], [], [], [], json_encode($this->validParams()));
 
         $_SERVER['HTTP_X_AMZ_SNS_MESSAGE_TYPE'] = 'SubscriptionConfirmation';
 
@@ -41,13 +41,12 @@ class SesSignatureValidatorTest extends TestCase
     /** @test * */
     public function it_calls_the_subscribe_url_when_its_a_subscription_confirmation_requests()
     {
-        $request = new Request($this->validParams([
-            'Type' => 'SubscriptionConfirmation',
-            'SubscribeURL' => url('test-route'),
-            'Token' => '',
-        ]));
+        $params = $this->getStub('subscriptionConfirmation');
+        $params['SubscribeURL'] = url('test-route');
 
-        $this->expectException(Exception::class);
+        $request = Request::create('/ses-feedback', 'POST', [], [], [], [], json_encode($params));
+
+        $this->expectExceptionMessage("file_get_contents(".url('test-route')."): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found");
 
         $this->validator->isValid($request, $this->config);
     }
