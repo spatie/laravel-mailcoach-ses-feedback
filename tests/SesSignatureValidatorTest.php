@@ -46,7 +46,7 @@ class SesSignatureValidatorTest extends TestCase
 
         $request = Request::create('/ses-feedback', 'POST', [], [], [], [], json_encode($params));
 
-        $this->expectExceptionMessage("file_get_contents(".url('test-route')."): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found");
+        $this->expectExceptionMessage("file_get_contents(".url('test-route').")");
 
         $this->validator->isValid($request, $this->config);
     }
