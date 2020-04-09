@@ -74,7 +74,7 @@ class ProcessSesWebhookJobTest extends TestCase
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
             $this->assertTrue($this->send->is($sendFeedbackItem->send));
             $this->assertEquals('bounce', $sendFeedbackItem->type);
-            $this->assertEquals(Carbon::parse('2019-11-28T09:43:55.547Z'), $sendFeedbackItem->created_at);
+            $this->assertEquals(Carbon::parse('2019-11-28T09:43:55'), $sendFeedbackItem->created_at);
         });
     }
 
@@ -109,7 +109,9 @@ class ProcessSesWebhookJobTest extends TestCase
         $send = factory(Send::class)->create([
             'transport_message_id' => '0107016eb143be75-4e95d17b-1251-4abe-b75f-f0eccf0c11ac-000000',
         ]);
-        $send->campaign->update(['track_opens' => true]);
+        $send->campaign->update([
+            'track_opens' => true
+        ]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();
 
@@ -135,7 +137,7 @@ class ProcessSesWebhookJobTest extends TestCase
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) use ($send) {
             $this->assertTrue($send->is($sendFeedbackItem->send));
             $this->assertEquals('complaint', $sendFeedbackItem->type);
-            $this->assertEquals(Carbon::parse('2019-11-28T09:13:57.357Z'), $sendFeedbackItem->created_at);
+            $this->assertEquals(Carbon::parse('2019-11-28T09:13:57'), $sendFeedbackItem->created_at);
         });
     }
 
