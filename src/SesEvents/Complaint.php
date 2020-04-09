@@ -13,6 +13,6 @@ class Complaint extends SesEvent
 
     public function handle(Send $send)
     {
-        $send->registerComplaint();
+        $send->registerComplaint($this->getTimestamp());
     }
 }

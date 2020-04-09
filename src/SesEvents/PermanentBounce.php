@@ -21,6 +21,6 @@ class PermanentBounce extends SesEvent
 
     public function handle(Send $send)
     {
-        $send->registerBounce();
+        $send->registerBounce($this->getTimestamp());
     }
 }
