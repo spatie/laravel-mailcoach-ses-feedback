@@ -40,7 +40,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         if (!$messageId = Arr::get($payload, 'mail.messageId')) {
             return;
-        };
+        }
 
         /** @var \Spatie\Mailcoach\Models\Send $send */
         $send = Send::findByTransportMessageId($messageId);
@@ -52,6 +52,8 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         $sesEvent = SesEventFactory::createForPayload($payload);
 
         $sesEvent->handle($send);
+
+        $this->webhookCall->delete();
     }
 
     protected function getMessageFromWebhookCall(): ?Message

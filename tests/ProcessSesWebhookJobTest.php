@@ -142,6 +142,16 @@ class ProcessSesWebhookJobTest extends TestCase
     }
 
     /** @test */
+    public function it_deletes_the_webhook_after_processing()
+    {
+        $job = new ProcessSesWebhookJob($this->webhookCall);
+
+        $job->handle();
+
+        $this->assertDeleted($this->webhookCall);
+    }
+
+    /** @test */
     public function it_does_nothing_when_it_cannot_find_the_transport_message_id()
     {
         $data = $this->webhookCall->payload;
