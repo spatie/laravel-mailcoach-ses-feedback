@@ -3,6 +3,8 @@
 namespace Spatie\MailcoachSesFeedback\Tests;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
+use Spatie\Mailcoach\Events\WebhookCallProcessedEvent;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\Mailcoach\Models\SendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
@@ -139,6 +141,26 @@ class ProcessSesWebhookJobTest extends TestCase
             $this->assertEquals('complaint', $sendFeedbackItem->type);
             $this->assertEquals(Carbon::parse('2019-11-28T09:13:57'), $sendFeedbackItem->created_at);
         });
+    }
+
+    /** @test */
+    public function it_fires_an_event_when_the_webhook_is_processed()
+    {
+        $webhookCall = SesWebhookCall::create([
+            'name' => 'ses',
+            'payload' => $this->getStub('clickWebhookContent'),
+        ]);
+
+        /** @var Send $send */
+        $send = factory(Send::class)->create([
+            'transport_message_id' => '0107016eb14a6683-21d61476-4ac8-4eb2-aa71-79209c70e8a4-000000',
+        ]);
+
+        Event::fake();
+
+        (new ProcessSesWebhookJob($webhookCall))->handle();
+
+        Event::assertDispatched(WebhookCallProcessedEvent::class);
     }
 
     /** @test */
