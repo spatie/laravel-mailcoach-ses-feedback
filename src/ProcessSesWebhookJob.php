@@ -6,6 +6,7 @@ use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
 use Exception;
 use Illuminate\Support\Arr;
+use Spatie\Mailcoach\Events\WebhookCallProcessedEvent;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\WebhookClient\Models\WebhookCall;
 use Spatie\WebhookClient\ProcessWebhookJob;
@@ -52,6 +53,8 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         $sesEvent = SesEventFactory::createForPayload($payload);
 
         $sesEvent->handle($send);
+
+        event(new WebhookCallProcessedEvent($this->webhookCall));
     }
 
     protected function getMessageFromWebhookCall(): ?Message

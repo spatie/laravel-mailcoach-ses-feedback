@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.2.0 - 2020-04-27
+
+- fire `WebhookCallProcessedEvent` when webhook has been processed
+
 ## 2.1.2 - 2020-04-09
 
 - fix time on feedback registration
