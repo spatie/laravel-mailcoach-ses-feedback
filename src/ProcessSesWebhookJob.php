@@ -41,12 +41,16 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         if (!$messageId = Arr::get($payload, 'mail.messageId')) {
             return;
-        };
+        }
 
         /** @var \Spatie\Mailcoach\Models\Send $send */
         $send = Send::findByTransportMessageId($messageId);
 
         if (!$send) {
+            return;
+        }
+
+        if (! Arr::get($payload, 'eventType')) {
             return;
         }
 
