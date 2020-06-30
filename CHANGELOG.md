@@ -5,6 +5,7 @@ All notable changes to `laravel-mailcoach-ses-feedback` will be documented in th
 ## 2.2.1 - 2020-06-30
 
 - Ignore webhook payloads that have no `eventType`
+- Simplify message validation
 
 ## 2.2.0 - 2020-04-27
 
