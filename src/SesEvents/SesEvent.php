@@ -25,6 +25,6 @@ abstract class SesEvent
 
         $timestamp = $this->payload[$eventType]['timestamp'];
 
-        return $timestamp ? Carbon::parse($timestamp) : null;
+        return $timestamp ? Carbon::parse($timestamp)->setTimezone(config('app.timezone')) : null;
     }
 }

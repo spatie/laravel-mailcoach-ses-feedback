@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.2.2 - 2020-07-01
+
+- Use the configured app timezone for stored feedback
+
 ## 2.2.1 - 2020-06-30
 
 - Ignore webhook payloads that have no `eventType`
