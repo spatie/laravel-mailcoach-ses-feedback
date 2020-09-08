@@ -31,7 +31,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "fzaninotto/faker": "^1.9",
-        "laravel/legacy-factories": "^1.0",
+        "laravel/legacy-factories": "^1.0.4",
         "orchestra/testbench": "^5.0|^6.0",
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "^5.0"
