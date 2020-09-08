@@ -2,7 +2,6 @@
 
 namespace Spatie\MailcoachSesFeedback\Tests;
 
-use Exception;
 use Illuminate\Http\Request;
 use Spatie\MailcoachSesFeedback\SesSignatureValidator;
 use Spatie\MailcoachSesFeedback\SesWebhookConfig;
