@@ -6,7 +6,6 @@ use CreateMailcoachTables;
 use CreateWebhookCallsTable;
 use Illuminate\Support\Facades\Route;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\BladeX\BladeXServiceProvider;
 use Spatie\Mailcoach\MailcoachServiceProvider;
 use Spatie\MailcoachSesFeedback\MailcoachSesFeedbackServiceProvider;
 

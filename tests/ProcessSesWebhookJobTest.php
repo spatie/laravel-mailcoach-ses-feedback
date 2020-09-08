@@ -9,7 +9,6 @@ use Spatie\Mailcoach\Models\Send;
 use Spatie\Mailcoach\Models\SendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
 use Spatie\MailcoachSesFeedback\SesWebhookCall;
-use Spatie\WebhookClient\Models\WebhookCall;
 
 class ProcessSesWebhookJobTest extends TestCase
 {
@@ -196,5 +195,4 @@ class ProcessSesWebhookJobTest extends TestCase
         $this->assertEquals(1, SendFeedbackItem::count());
         $this->assertEquals(1, SesWebhookCall::count());
     }
-
 }
