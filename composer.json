@@ -17,7 +17,7 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "https://satis.mailcoach.app"
+            "url": "https://satis.spatie.be"
         }
     ],
     "require": {
@@ -29,9 +29,10 @@
         "spatie/laravel-webhook-client": "^2.4"
     },
     "require-dev": {
-        "fzaninotto/faker": "^1.9",
         "friendsofphp/php-cs-fixer": "^2.16",
-        "orchestra/testbench": "^5.0",
+        "fzaninotto/faker": "^1.9",
+        "laravel/legacy-factories": "^1.0",
+        "orchestra/testbench": "^5.0|^6.0",
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "^5.0"
     },
