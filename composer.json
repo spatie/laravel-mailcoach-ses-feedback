@@ -25,7 +25,7 @@
         "php": "^7.4",
         "aws/aws-php-sns-message-validator": "^1.6",
         "illuminate/http": "^7.0|^8.0",
-        "spatie/laravel-mailcoach": "^2.9",
+        "spatie/laravel-mailcoach": "^2.9|^3.0",
         "spatie/laravel-webhook-client": "^2.4"
     },
     "require-dev": {
