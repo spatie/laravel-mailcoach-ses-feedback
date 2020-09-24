@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.3.0 - 2020-09-24
+
+- Tag a Mailcoach v3 compatible release
+
 ## 2.2.3 - 2020-09-08
 
 - add support for Laravel 8
