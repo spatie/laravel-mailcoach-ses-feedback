@@ -5,9 +5,6 @@ namespace Spatie\MailcoachSesFeedback\Tests\factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Spatie\Mailcoach\Enums\CampaignStatus;
 use Spatie\Mailcoach\Models\Campaign;
-use Spatie\Mailcoach\Models\EmailList;
-use Spatie\Mailcoach\Models\Send;
-use Spatie\Mailcoach\Models\Subscriber;
 
 class CampaignFactory extends Factory
 {

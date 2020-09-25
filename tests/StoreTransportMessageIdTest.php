@@ -3,7 +3,6 @@
 namespace Spatie\MailcoachSesFeedback\Tests;
 
 use Illuminate\Mail\Events\MessageSent;
-use Spatie\Mailcoach\Database\Factories\CampaignSendFactory;
 use Spatie\Mailcoach\Models\Send;
 use Spatie\MailcoachSesFeedback\Tests\factories\SendFactory;
 use Swift_Message;
