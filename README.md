@@ -4,7 +4,7 @@ This package is an add on for [spatie/laravel-mailcoach](https://github.com/spat
 
 ## Support us
 
-[![Image](https://github-ads.s3.eu-central-1.amazonaws.com/laravel-mailcoach-ses-feedback.jpg)](https://spatie.be/github-ad-click/laravel-mailcoach-ses-feedback)
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-mailcoach-ses-feedback.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-mailcoach-ses-feedback)
 
 We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
 
