@@ -8,7 +8,7 @@ class AddConfigurationSetHeader
 {
     public function handle(MessageSending $event)
     {
-        if (! config('mail.driver') === 'ses') {
+        if (! in_array('ses', [config('mail.driver'), config('mail.default')])) {
             return;
         }
 
