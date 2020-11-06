@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.3.2 - 2020-11-06
+
+- fix an issue where the configuration set wasn't added
+
 ## 2.3.1 - 2020-10-16
 
 - fix compatibility with L8
