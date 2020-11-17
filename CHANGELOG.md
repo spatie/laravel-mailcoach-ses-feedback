@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.3.3 - 2020-11-17
+
+- Allows custom mailer with "ses" transport 
+
 ## 2.3.2 - 2020-11-06
 
 - fix an issue where the configuration set wasn't added
