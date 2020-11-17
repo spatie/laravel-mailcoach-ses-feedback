@@ -14,7 +14,8 @@ class AddConfigurationSetHeaderTest extends TestCase
         $message->getHeaders()->addTextHeader('X-MAILCOACH', true);
 
         config()->set('mailcoach.ses_feedback.configuration_set', 'hello');
-        config()->set('mail.driver', 'ses');
+        config()->set('mail.default', 'ses');
+        config()->set('mail.mailers.ses.transport', 'ses');
 
         event(new MessageSending($message));
 
