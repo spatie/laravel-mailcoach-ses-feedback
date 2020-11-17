@@ -8,7 +8,9 @@ class AddConfigurationSetHeader
 {
     public function handle(MessageSending $event)
     {
-        if (! in_array('ses', [config('mail.driver'), config('mail.default'), config('mail.mailers.mailcoach.transport')])) {
+        $driver = config('mailcoach.mailer') ?? config('mailcoach.campaign_mailer') ?? config('mail.default');
+        
+        if ('ses' !== config("mail.mailers.{$driver}.transport")) {
             return;
         }
 
