@@ -40,6 +40,8 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
         if (!$messageId = Arr::get($payload, 'mail.messageId')) {
+            $this->markAsProcessed();
+
             return;
         }
 
@@ -47,10 +49,14 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         $send = Send::findByTransportMessageId($messageId);
 
         if (!$send) {
+            $this->markAsProcessed();
+
             return;
         }
 
         if (! Arr::get($payload, 'eventType')) {
+            $this->markAsProcessed();
+
             return;
         }
 
@@ -58,6 +64,11 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         $sesEvent->handle($send);
 
+        $this->markAsProcessed();
+    }
+
+    protected function markAsProcessed(): void
+    {
         event(new WebhookCallProcessedEvent($this->webhookCall));
     }
 

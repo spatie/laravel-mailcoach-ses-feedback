@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.3.4 - 2020-12-07
+
+- Mark webhook calls as processed when no send is found 
+
 ## 2.3.3 - 2020-11-17
 
 - Allows custom mailer with "ses" transport 
