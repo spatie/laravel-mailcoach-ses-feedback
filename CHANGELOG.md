@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 2.4.0 - 2020-12-15
+
+- allow send method to be overridden
+
 ## 2.3.5 - 2020-12-07
 
 - Mark webhook calls as processed when no send is found
