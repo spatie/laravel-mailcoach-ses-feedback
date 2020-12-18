@@ -6,6 +6,7 @@ use CreateMailcoachTables;
 use CreateWebhookCallsTable;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
+use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Mailcoach\MailcoachServiceProvider;
 use Spatie\MailcoachSesFeedback\MailcoachSesFeedbackServiceProvider;
@@ -28,7 +29,7 @@ class TestCase extends Orchestra
         return [
             MailcoachServiceProvider::class,
             MailcoachSesFeedbackServiceProvider::class,
-            Livewire::class,
+            LivewireServiceProvider::class,
         ];
     }
 

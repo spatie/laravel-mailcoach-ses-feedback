@@ -6,10 +6,9 @@ use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
 use Exception;
 use Illuminate\Support\Arr;
-use Spatie\Mailcoach\Events\WebhookCallProcessedEvent;
-use Spatie\Mailcoach\Models\Send;
-use Spatie\Mailcoach\Support\Config;
-use Spatie\Mailcoach\Traits\UsesMailcoachModels;
+use Spatie\Mailcoach\Domain\Campaign\Events\WebhookCallProcessedEvent;
+use Spatie\Mailcoach\Domain\Shared\Support\Config;
+use Spatie\Mailcoach\Domain\Shared\Traits\UsesMailcoachModels;
 use Spatie\WebhookClient\Models\WebhookCall;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
@@ -48,7 +47,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
             return;
         }
 
-        /** @var \Spatie\Mailcoach\Models\Send $send */
+        /** @var \Spatie\Mailcoach\Domain\Campaign\Models\Send $send */
         $sendModelClass = $this->getSendClass();
 
         $send = $sendModelClass::findByTransportMessageId($messageId);

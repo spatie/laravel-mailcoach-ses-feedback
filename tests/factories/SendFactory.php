@@ -3,7 +3,7 @@
 namespace Spatie\MailcoachSesFeedback\Tests\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Spatie\Mailcoach\Models\Send;
+use Spatie\Mailcoach\Domain\Campaign\Models\Send;
 
 class SendFactory extends Factory
 {
