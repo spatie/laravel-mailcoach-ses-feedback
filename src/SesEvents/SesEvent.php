@@ -4,16 +4,13 @@ namespace Spatie\MailcoachSesFeedback\SesEvents;
 
 use Carbon\Carbon;
 use DateTimeInterface;
-use Spatie\Mailcoach\Models\Send;
+use Spatie\Mailcoach\Domain\Campaign\Models\Send;
 
 abstract class SesEvent
 {
-    protected array $payload;
-
-    public function __construct(array $payload)
-    {
-        $this->payload = $payload;
-    }
+    public function __construct(
+        protected array $payload
+    ) {}
 
     abstract public function canHandlePayload(): bool;
 

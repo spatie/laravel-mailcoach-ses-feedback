@@ -2,7 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\SesEvents;
 
-use Spatie\Mailcoach\Models\Send;
+use Spatie\Mailcoach\Domain\Campaign\Models\Send;
 
 class PermanentBounce extends SesEvent
 {
