@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+
+## 2.4.1 - 2021-01-15
+
+- Fix an issue where the configuration set header was not being set when using a different mailcoach mailer
+
 ## 2.4.0 - 2020-12-15
 
 - allow Send class to be overridden
