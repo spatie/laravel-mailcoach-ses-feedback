@@ -4,7 +4,7 @@ namespace Spatie\MailcoachSesFeedback\SesEvents;
 
 use Carbon\Carbon;
 use DateTimeInterface;
-use Spatie\Mailcoach\Domain\Campaign\Models\Send;
+use Spatie\Mailcoach\Domain\Shared\Models\Send;
 
 abstract class SesEvent
 {

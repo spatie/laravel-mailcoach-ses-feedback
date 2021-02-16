@@ -3,7 +3,7 @@
 namespace Spatie\MailcoachSesFeedback\Tests\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Spatie\Mailcoach\Domain\Campaign\Models\Subscriber;
+use Spatie\Mailcoach\Domain\Audience\Models\Subscriber;
 
 class SubscriberFactory extends Factory
 {

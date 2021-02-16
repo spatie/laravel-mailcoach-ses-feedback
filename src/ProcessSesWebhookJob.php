@@ -27,6 +27,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
     public function handle()
     {
+
         if (! $this->validateMessageFromWebhookCall()) {
             $this->webhookCall->delete();
 
@@ -47,7 +48,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
             return;
         }
 
-        /** @var \Spatie\Mailcoach\Domain\Campaign\Models\Send $send */
+        /** @var \Spatie\Mailcoach\Domain\Shared\Models\Send $send */
         $sendModelClass = $this->getSendClass();
 
         $send = $sendModelClass::findByTransportMessageId($messageId);
@@ -82,10 +83,9 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         try {
             $message = Message::fromJsonString(json_encode($this->webhookCall->payload));
-        } catch (Exception $exception) {
+        } catch (Exception) {
             return false;
         }
-
         return $validator->isValid($message);
     }
 }

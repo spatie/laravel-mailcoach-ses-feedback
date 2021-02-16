@@ -2,7 +2,7 @@
 
 namespace Spatie\MailcoachSesFeedback\SesEvents;
 
-use Spatie\Mailcoach\Domain\Campaign\Models\Send;
+use Spatie\Mailcoach\Domain\Shared\Models\Send;
 
 class Complaint extends SesEvent
 {
