@@ -27,7 +27,6 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
     public function handle()
     {
-
         if (! $this->validateMessageFromWebhookCall()) {
             $this->webhookCall->delete();
 
@@ -79,7 +78,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
     protected function validateMessageFromWebhookCall(): bool
     {
-        $validator = new MessageValidator();
+        $validator = resolve(MessageValidator::class);
 
         try {
             $message = Message::fromJsonString(json_encode($this->webhookCall->payload));
