@@ -6,7 +6,6 @@ use CreateMailcoachTables;
 use CreateWebhookCallsTable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\Mailcoach\MailcoachServiceProvider;
