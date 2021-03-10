@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 3.0.0 - 2021-03-10
+
+- Support for Mailcoach v4
+
 ## 2.4.2 - 2021-01-15
 
 - Fix an issue where the configuration set header was not being set when only using the mailer setting on lists

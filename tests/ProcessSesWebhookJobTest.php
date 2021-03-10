@@ -2,15 +2,15 @@
 
 namespace Spatie\MailcoachSesFeedback\Tests;
 
+use Aws\Sns\MessageValidator;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use Spatie\Mailcoach\Events\WebhookCallProcessedEvent;
-use Spatie\Mailcoach\Models\Send;
-use Spatie\Mailcoach\Models\SendFeedbackItem;
+use Spatie\Mailcoach\Domain\Campaign\Events\WebhookCallProcessedEvent;
+use Spatie\Mailcoach\Domain\Shared\Models\Send;
+use Spatie\Mailcoach\Domain\Shared\Models\SendFeedbackItem;
 use Spatie\MailcoachSesFeedback\ProcessSesWebhookJob;
 use Spatie\MailcoachSesFeedback\SesWebhookCall;
-use Spatie\MailcoachSesFeedback\Tests\factories\SendFactory;
 
 class ProcessSesWebhookJobTest extends TestCase
 {
@@ -30,9 +30,11 @@ class ProcessSesWebhookJobTest extends TestCase
             'payload' => $this->getStub('bounceWebhookContent'),
         ]);
 
-        $this->send = (new SendFactory())->create([
+        $this->send = Send::factory()->create([
             'transport_message_id' => '0107016eb1654604-5f27d09d-872f-4a34-be34-c4e24741cb66-000000',
         ]);
+
+        $this->mock(MessageValidator::class)->shouldReceive('isValid')->andReturnTrue();
     }
 
     /** @test * */
@@ -72,6 +74,12 @@ class ProcessSesWebhookJobTest extends TestCase
     /** @test */
     public function it_processes_a_ses_webhook_call_for_a_bounce()
     {
+        $data = $this->getStub('bounceWebhookContent');
+
+        $this->webhookCall->update([
+            'payload' => $data,
+        ]);
+
         $job = new ProcessSesWebhookJob($this->webhookCall);
 
         $job->handle();
@@ -94,7 +102,7 @@ class ProcessSesWebhookJobTest extends TestCase
         ]);
 
         /** @var Send $send */
-        $send = (new SendFactory())->create([
+        $send = Send::factory()->create([
             'transport_message_id' => '0107016eb14a6683-21d61476-4ac8-4eb2-aa71-79209c70e8a4-000000',
         ]);
         $send->campaign->update(['track_clicks' => true]);
@@ -114,7 +122,7 @@ class ProcessSesWebhookJobTest extends TestCase
         ]);
 
         /** @var Send $send */
-        $send = (new SendFactory())->create([
+        $send = Send::factory()->create([
             'transport_message_id' => '0107016eb143be75-4e95d17b-1251-4abe-b75f-f0eccf0c11ac-000000',
         ]);
         $send->campaign->update([
@@ -136,7 +144,7 @@ class ProcessSesWebhookJobTest extends TestCase
         ]);
 
         /** @var Send $send */
-        $send = (new SendFactory())->create([
+        $send = Send::factory()->create([
             'transport_message_id' => '0107016eb149cd22-7b2d056e-8298-4cb2-b716-d7d85935a752-000000',
         ]);
 
@@ -160,7 +168,7 @@ class ProcessSesWebhookJobTest extends TestCase
         ]);
 
         /** @var Send $send */
-        $send = (new SendFactory())->create([
+        $send = Send::factory()->create([
             'transport_message_id' => '0107016eb14a6683-21d61476-4ac8-4eb2-aa71-79209c70e8a4-000000',
         ]);
 

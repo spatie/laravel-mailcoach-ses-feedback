@@ -6,10 +6,9 @@ use Aws\Sns\Message;
 use Aws\Sns\MessageValidator;
 use Exception;
 use Illuminate\Support\Arr;
-use Spatie\Mailcoach\Events\WebhookCallProcessedEvent;
-use Spatie\Mailcoach\Models\Send;
-use Spatie\Mailcoach\Support\Config;
-use Spatie\Mailcoach\Traits\UsesMailcoachModels;
+use Spatie\Mailcoach\Domain\Campaign\Events\WebhookCallProcessedEvent;
+use Spatie\Mailcoach\Domain\Shared\Support\Config;
+use Spatie\Mailcoach\Domain\Shared\Traits\UsesMailcoachModels;
 use Spatie\WebhookClient\Models\WebhookCall;
 use Spatie\WebhookClient\ProcessWebhookJob;
 
@@ -21,7 +20,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
     {
         parent::__construct($webhookCall);
 
-        $this->queue = config('mailcoach.perform_on_queue.process_feedback_job');
+        $this->queue = config('mailcoach.campaigns.perform_on_queue.process_feedback_job');
 
         $this->connection = $this->connection ?? Config::getQueueConnection();
     }
@@ -48,7 +47,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
             return;
         }
 
-        /** @var \Spatie\Mailcoach\Models\Send $send */
+        /** @var \Spatie\Mailcoach\Domain\Shared\Models\Send $send */
         $sendModelClass = $this->getSendClass();
 
         $send = $sendModelClass::findByTransportMessageId($messageId);
@@ -79,14 +78,13 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
     protected function validateMessageFromWebhookCall(): bool
     {
-        $validator = new MessageValidator();
+        $validator = resolve(MessageValidator::class);
 
         try {
             $message = Message::fromJsonString(json_encode($this->webhookCall->payload));
-        } catch (Exception $exception) {
+        } catch (Exception) {
             return false;
         }
-
         return $validator->isValid($message);
     }
 }
