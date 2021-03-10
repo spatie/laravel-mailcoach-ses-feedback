@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mailcoach-ses-feedback` will be documented in this file
 
+## 3.0.1 - 2021-03-10
+
+- Fix an issue where campaign could be null
+
 ## 3.0.0 - 2021-03-10
 
 - Support for Mailcoach v4

@@ -13,10 +13,6 @@ class Open extends SesEvent
 
     public function handle(Send $send)
     {
-        if (! $send->campaign->track_opens) {
-            return;
-        }
-
         $send->registerOpen($this->getTimestamp());
     }
 }
