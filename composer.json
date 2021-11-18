@@ -24,6 +24,7 @@
         "ext-json": "*",
         "php": "^8.0",
         "aws/aws-php-sns-message-validator": "^1.6",
+        "illuminate/support": "^8.67",
         "spatie/laravel-mailcoach": "^4.0"
     },
     "require-dev": {
