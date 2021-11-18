@@ -41,7 +41,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
-        if (!$messageId = Arr::get($payload, 'mail.messageId')) {
+        if (! $messageId = Arr::get($payload, 'mail.messageId')) {
             $this->markAsProcessed();
 
             return;
@@ -52,7 +52,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         $send = $sendModelClass::findByTransportMessageId($messageId);
 
-        if (!$send) {
+        if (! $send) {
             $this->markAsProcessed();
 
             return;
@@ -85,6 +85,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         } catch (Exception) {
             return false;
         }
+
         return $validator->isValid($message);
     }
 }

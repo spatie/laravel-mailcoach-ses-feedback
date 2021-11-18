@@ -10,7 +10,8 @@ abstract class SesEvent
 {
     public function __construct(
         protected array $payload
-    ) {}
+    ) {
+    }
 
     abstract public function canHandlePayload(): bool;
 

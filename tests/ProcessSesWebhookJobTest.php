@@ -126,7 +126,7 @@ class ProcessSesWebhookJobTest extends TestCase
             'transport_message_id' => '0107016eb143be75-4e95d17b-1251-4abe-b75f-f0eccf0c11ac-000000',
         ]);
         $send->campaign->update([
-            'track_opens' => true
+            'track_opens' => true,
         ]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();

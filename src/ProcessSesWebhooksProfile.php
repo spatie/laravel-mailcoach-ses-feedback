@@ -13,6 +13,7 @@ class ProcessSesWebhooksProfile implements WebhookProfile
     {
         try {
             Message::fromRawPostData();
+
             return true;
         } catch (Exception) {
             return false;
