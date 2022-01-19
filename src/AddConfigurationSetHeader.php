@@ -16,7 +16,7 @@ class AddConfigurationSetHeader
             return;
         }
 
-        $event->message->getHeaders()->removeAll('X-SES-CONFIGURATION-SET');
+        $event->message->getHeaders()->remove('X-SES-CONFIGURATION-SET');
         $event->message->getHeaders()->addTextHeader('X-SES-CONFIGURATION-SET', $configuration_set);
     }
 }
