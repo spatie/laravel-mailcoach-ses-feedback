@@ -31,7 +31,7 @@ class ProcessSesWebhookJobTest extends TestCase
         ]);
 
         $this->send = Send::factory()->create([
-            'transport_message_id' => '0107016eb1654604-5f27d09d-872f-4a34-be34-c4e24741cb66-000000',
+            'transport_message_id' => '93ef47baa0e7818557569e92494f4be1@swift.generated',
         ]);
 
         $this->mock(MessageValidator::class)->shouldReceive('isValid')->andReturnTrue();
@@ -103,7 +103,7 @@ class ProcessSesWebhookJobTest extends TestCase
 
         /** @var Send $send */
         $send = Send::factory()->create([
-            'transport_message_id' => '0107016eb14a6683-21d61476-4ac8-4eb2-aa71-79209c70e8a4-000000',
+            'transport_message_id' => '441daaa28872991703a3b02a72408c62@swift.generated',
         ]);
         $send->campaign->update(['track_clicks' => true]);
 
@@ -123,7 +123,7 @@ class ProcessSesWebhookJobTest extends TestCase
 
         /** @var Send $send */
         $send = Send::factory()->create([
-            'transport_message_id' => '0107016eb143be75-4e95d17b-1251-4abe-b75f-f0eccf0c11ac-000000',
+            'transport_message_id' => 'e56a471288e8874bb27a92b7634ef86f@swift.generated',
         ]);
         $send->campaign->update([
             'track_opens' => true,
@@ -145,7 +145,7 @@ class ProcessSesWebhookJobTest extends TestCase
 
         /** @var Send $send */
         $send = Send::factory()->create([
-            'transport_message_id' => '0107016eb149cd22-7b2d056e-8298-4cb2-b716-d7d85935a752-000000',
+            'transport_message_id' => '5d5929d61c2bfd8de65f2cf07a1457de@swift.generated',
         ]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();
@@ -169,7 +169,7 @@ class ProcessSesWebhookJobTest extends TestCase
 
         /** @var Send $send */
         $send = Send::factory()->create([
-            'transport_message_id' => '0107016eb14a6683-21d61476-4ac8-4eb2-aa71-79209c70e8a4-000000',
+            'transport_message_id' => 'e56a471288e8874bb27a92b7634ef86f@swift.generated',
         ]);
 
         Event::fake();
@@ -184,7 +184,7 @@ class ProcessSesWebhookJobTest extends TestCase
     {
         $data = $this->webhookCall->payload;
         $message = json_decode($data['Message'], true);
-        $message['mail']['messageId'] = 'some-other-id';
+        $this->send->update(['transport_message_id' => 'some-other-id']);
         $data['Message'] = json_encode($message);
 
         $this->webhookCall->update([

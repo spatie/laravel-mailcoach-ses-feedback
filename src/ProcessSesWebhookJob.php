@@ -41,7 +41,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
-        if (! $messageId = Arr::get($payload, 'mail.messageId')) {
+        if (! $messageId = $this->getMessageId($payload)) {
             $this->markAsProcessed();
 
             return;
@@ -87,5 +87,22 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         }
 
         return $validator->isValid($message);
+    }
+
+    protected function getMessageId(?array $payload): ?string
+    {
+        if (! $payload) {
+            return null;
+        }
+
+        $headers = Arr::get($payload, 'mail.headers', []);
+
+        foreach($headers as $header) {
+            if ($header['name'] === 'Message-ID') {
+                return (string)str($header['value'])->between('<', '>');
+            }
+        }
+
+        return null;
     }
 }
