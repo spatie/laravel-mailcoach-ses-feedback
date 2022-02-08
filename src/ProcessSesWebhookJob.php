@@ -97,7 +97,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         $headers = Arr::get($payload, 'mail.headers', []);
 
-        foreach($headers as $header) {
+        foreach ($headers as $header) {
             if ($header['name'] === 'Message-ID') {
                 return (string)str($header['value'])->between('<', '>');
             }
