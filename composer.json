@@ -26,7 +26,7 @@
         "aws/aws-php-sns-message-validator": "^1.6",
         "illuminate/support": "^9.0",
         "symfony/amazon-mailer": "^6.0",
-        "spatie/laravel-mailcoach": "^5.0"
+        "spatie/laravel-mailcoach": "^5.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.12",
