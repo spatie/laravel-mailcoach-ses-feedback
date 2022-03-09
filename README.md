@@ -1,3 +1,6 @@
+
+[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
+
 # Process feedback for email campaigns sent using Amazon SES
 
 This package is an add on for [spatie/laravel-mailcoach](https://github.com/spatie/laravel-mailcoach) that can process the feedback given by SES.
