@@ -123,7 +123,29 @@ class ProcessSesWebhookJobTest extends TestCase
 
         /** @var Send $send */
         $send = Send::factory()->create([
-            'transport_message_id' => 'e56a471288e8874bb27a92b7634ef86f@swift.generated',
+            'transport_message_id' => '0107018023eb0291-0bc7253b-53c2-473f-8efd-88e3637c18ce-000000',
+        ]);
+        $send->campaign->update([
+            'track_opens' => true,
+        ]);
+
+        (new ProcessSesWebhookJob($webhookCall))->handle();
+
+        $this->assertEquals(1, $send->opens->count());
+    }
+
+    /** @test */
+    public function it_processes_a_ses_webhook_call_for_opens_with_message_id_from_header()
+    {
+        $webhookCall = SesWebhookCall::create([
+            'name' => 'ses',
+            'external_id' => $this->getStub('openWebhookContent')['MessageId'],
+            'payload' => $this->getStub('openWebhookContent'),
+        ]);
+
+        /** @var Send $send */
+        $send = Send::factory()->create([
+            'transport_message_id' => 'ebe712eb83fab12b595b69657d2bfe55@spatie.be',
         ]);
         $send->campaign->update([
             'track_opens' => true,

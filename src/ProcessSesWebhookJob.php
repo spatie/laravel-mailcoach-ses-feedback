@@ -7,6 +7,7 @@ use Aws\Sns\MessageValidator;
 use Exception;
 use Illuminate\Support\Arr;
 use Spatie\Mailcoach\Domain\Campaign\Events\WebhookCallProcessedEvent;
+use Spatie\Mailcoach\Domain\Shared\Models\Send;
 use Spatie\Mailcoach\Domain\Shared\Support\Config;
 use Spatie\Mailcoach\Domain\Shared\Traits\UsesMailcoachModels;
 use Spatie\WebhookClient\Jobs\ProcessWebhookJob;
@@ -41,16 +42,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         $payload = json_decode($this->webhookCall->payload['Message'], true);
 
-        if (! $messageId = $this->getMessageId($payload)) {
-            $this->markAsProcessed();
-
-            return;
-        }
-
-        /** @var \Spatie\Mailcoach\Domain\Shared\Models\Send $send */
-        $sendModelClass = $this->getSendClass();
-
-        $send = $sendModelClass::findByTransportMessageId($messageId);
+        $send = $this->getSendByMessageHeader($payload) ?? $this->getSendByMessageId($payload);
 
         if (! $send) {
             $this->markAsProcessed();
@@ -89,7 +81,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         return $validator->isValid($message);
     }
 
-    protected function getMessageId(?array $payload): ?string
+    protected function getSendByMessageHeader(?array $payload): ?Send
     {
         if (! $payload) {
             return null;
@@ -99,10 +91,24 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
 
         foreach ($headers as $header) {
             if ($header['name'] === 'Message-ID') {
-                return (string)str($header['value'])->between('<', '>');
+                $messageId = (string)str($header['value'])->between('<', '>');
+                return self::getSendClass()::findByTransportMessageId($messageId);
             }
         }
 
         return null;
+    }
+
+    protected function getSendByMessageId(?array $payload): ?Send
+    {
+        if (! $payload) {
+            return null;
+        }
+
+        if (! $messageId = $payload['mail']['messageId'] ?? null) {
+            return null;
+        }
+
+        return self::getSendClass()::findByTransportMessageId($messageId);
     }
 }
