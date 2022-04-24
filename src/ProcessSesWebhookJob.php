@@ -92,6 +92,7 @@ class ProcessSesWebhookJob extends ProcessWebhookJob
         foreach ($headers as $header) {
             if ($header['name'] === 'Message-ID') {
                 $messageId = (string)str($header['value'])->between('<', '>');
+
                 return self::getSendClass()::findByTransportMessageId($messageId);
             }
         }
