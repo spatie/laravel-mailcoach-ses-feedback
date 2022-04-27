@@ -23,7 +23,7 @@
     "require": {
         "ext-json": "*",
         "php": "^8.0",
-        "aws/aws-php-sns-message-validator": "^1.6",
+        "aws/aws-php-sns-message-validator": "^1.7",
         "illuminate/support": "^9.0",
         "symfony/amazon-mailer": "^6.0",
         "spatie/laravel-mailcoach": "^5.2"
