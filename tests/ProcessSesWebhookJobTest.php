@@ -6,6 +6,7 @@ use Aws\Sns\MessageValidator;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use Spatie\Mailcoach\Domain\Campaign\Enums\SendFeedbackType;
 use Spatie\Mailcoach\Domain\Campaign\Events\WebhookCallProcessedEvent;
 use Spatie\Mailcoach\Domain\Shared\Models\Send;
 use Spatie\Mailcoach\Domain\Shared\Models\SendFeedbackItem;
@@ -87,7 +88,7 @@ class ProcessSesWebhookJobTest extends TestCase
         $this->assertEquals(1, SendFeedbackItem::count());
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) {
             $this->assertTrue($this->send->is($sendFeedbackItem->send));
-            $this->assertEquals('bounce', $sendFeedbackItem->type);
+            $this->assertEquals(SendFeedbackType::Bounce, $sendFeedbackItem->type);
             $this->assertEquals(Carbon::parse('2019-11-28T09:43:55'), $sendFeedbackItem->created_at);
         });
     }
@@ -175,7 +176,7 @@ class ProcessSesWebhookJobTest extends TestCase
         $this->assertEquals(1, SendFeedbackItem::count());
         tap(SendFeedbackItem::first(), function (SendFeedbackItem $sendFeedbackItem) use ($send) {
             $this->assertTrue($send->is($sendFeedbackItem->send));
-            $this->assertEquals('complaint', $sendFeedbackItem->type);
+            $this->assertEquals(SendFeedbackType::Complaint, $sendFeedbackItem->type);
             $this->assertEquals(Carbon::parse('2019-11-28T09:13:57'), $sendFeedbackItem->created_at);
         });
     }
