@@ -3,7 +3,6 @@
 namespace Spatie\MailcoachSesFeedback\Tests\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Spatie\Mailcoach\Domain\Audience\Models\EmailList;
 
 class EmailListFactory extends Factory
@@ -21,7 +20,6 @@ class EmailListFactory extends Factory
             'default_reply_to_name' => $this->faker->name,
             'campaign_mailer' => config('mail.default') ?? 'array',
             'transactional_mailer' => config('mail.default') ?? 'array',
-            'website_slug' => Str::slug($this->faker->word),
         ];
     }
 }

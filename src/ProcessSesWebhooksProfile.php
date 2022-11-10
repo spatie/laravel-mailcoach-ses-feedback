@@ -12,7 +12,7 @@ class ProcessSesWebhooksProfile implements WebhookProfile
     public function shouldProcess(Request $request): bool
     {
         try {
-            Message::fromJsonString((string) $request->getContent());
+            Message::fromRawPostData();
 
             return true;
         } catch (Exception) {

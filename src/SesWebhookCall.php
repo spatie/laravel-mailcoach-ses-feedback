@@ -13,7 +13,7 @@ class SesWebhookCall extends WebhookCall
 
     public static function storeWebhook(WebhookConfig $config, Request $request): WebhookCall
     {
-        $message = Message::fromJsonString((string) $request->getContent());
+        $message = Message::fromRawPostData();
 
         return self::create([
             'name' => $config->name,
