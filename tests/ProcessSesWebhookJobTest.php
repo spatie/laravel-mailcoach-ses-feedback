@@ -106,7 +106,6 @@ class ProcessSesWebhookJobTest extends TestCase
         $send = Send::factory()->create([
             'transport_message_id' => '441daaa28872991703a3b02a72408c62@swift.generated',
         ]);
-        $send->campaign->update(['track_clicks' => true]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();
 
@@ -126,9 +125,6 @@ class ProcessSesWebhookJobTest extends TestCase
         $send = Send::factory()->create([
             'transport_message_id' => '0107018023eb0291-0bc7253b-53c2-473f-8efd-88e3637c18ce-000000',
         ]);
-        $send->campaign->update([
-            'track_opens' => true,
-        ]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();
 
@@ -147,9 +143,6 @@ class ProcessSesWebhookJobTest extends TestCase
         /** @var Send $send */
         $send = Send::factory()->create([
             'transport_message_id' => 'ebe712eb83fab12b595b69657d2bfe55@spatie.be',
-        ]);
-        $send->campaign->update([
-            'track_opens' => true,
         ]);
 
         (new ProcessSesWebhookJob($webhookCall))->handle();
