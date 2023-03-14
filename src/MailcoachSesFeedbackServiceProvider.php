@@ -12,7 +12,7 @@ class MailcoachSesFeedbackServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        Route::macro('sesFeedback', fn (string $url) => Route::post("{$url}/{mailer?}", '\\' . SesWebhookController::class));
+        Route::macro('sesFeedback', fn (string $url) => Route::post("{$url}/{mailerConfigKey?}", '\\' . SesWebhookController::class));
 
         Event::listen(MessageSending::class, AddConfigurationSetHeader::class);
         Event::listen(MessageSent::class, StoreTransportMessageId::class);
