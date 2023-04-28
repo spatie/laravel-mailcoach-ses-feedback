@@ -8,6 +8,7 @@ use Spatie\MailcoachSesFeedback\SesEvents\Open;
 use Spatie\MailcoachSesFeedback\SesEvents\Other;
 use Spatie\MailcoachSesFeedback\SesEvents\PermanentBounce;
 use Spatie\MailcoachSesFeedback\SesEvents\SesEvent;
+use Spatie\MailcoachSesFeedback\SesEvents\SoftBounce;
 
 class SesEventFactory
 {
@@ -16,6 +17,7 @@ class SesEventFactory
         Complaint::class,
         Open::class,
         PermanentBounce::class,
+        SoftBounce::class,
     ];
 
     public static function createForPayload(array $payload): SesEvent

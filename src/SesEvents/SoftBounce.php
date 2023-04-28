@@ -5,7 +5,7 @@ namespace Spatie\MailcoachSesFeedback\SesEvents;
 use Spatie\Mailcoach\Domain\Shared\Models\Send;
 use Spatie\MailcoachSesFeedback\Enums\BounceType;
 
-class PermanentBounce extends SesEvent
+class SoftBounce extends SesEvent
 {
     public function canHandlePayload(): bool
     {
@@ -13,15 +13,15 @@ class PermanentBounce extends SesEvent
             return false;
         }
 
-        if ($this->payload['bounce']['bounceType'] !== BounceType::Permanent->value) {
-            return false;
+        if (in_array($this->payload['bounce']['bounceType'], BounceType::softBounces(), true)) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public function handle(Send $send)
     {
-        $send->registerBounce($this->getTimestamp());
+        $send->registerBounce($this->getTimestamp(), softBounce: true);
     }
 }
